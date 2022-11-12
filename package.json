@@ -1,0 +1,13 @@
+{
+  "name": "yata",
+  "version": "0.0.1",
+  "description": "Yet another to-do application",
+  "author": "Mark",
+  "private": "true",
+  "license": "AGPL-3.0-or-later",
+  "type": "module",
+  "scripts": {},
+  "devDependencies": {
+    "cspell": "^6.14.2"
+  }
+}
