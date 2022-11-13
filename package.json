@@ -8,6 +8,11 @@
   "type": "module",
   "scripts": {},
   "devDependencies": {
-    "cspell": "^6.14.2"
+    "cspell": "^6.14.2",
+    "eslint": "^8.27.0",
+    "prettier": "^2.7.1"
+  },
+  "dependencies": {
+    "bootstrap": "^5.2.2"
   }
 }
