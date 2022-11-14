@@ -1,0 +1,17 @@
+{
+  "name": "Yet Another Todo App",
+  "short_name": "YATA!",
+  "start_url": "/src/view",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "theme_color": "#212529",
+  "background_color": "#f8f9fa",
+  "display": "fullscreen",
+  "orientation": "portrait"
+}

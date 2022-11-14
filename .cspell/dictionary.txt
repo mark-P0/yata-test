@@ -1,2 +1,3 @@
 yata
 todos
+fullscreen
