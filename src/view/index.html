@@ -36,9 +36,10 @@
       <div class="position-absolute bottom-0 end-0" id="floating-button">
         <button
           type="button"
-          class="position-fixed translate-middle btn btn-dark rounded-circle flex-center shadow"
+          aria-label="Open modal"
           data-bs-toggle="modal"
           data-bs-target="#modal"
+          class="position-fixed translate-middle btn btn-dark rounded-circle flex-center shadow"
         >
           +
         </button>
@@ -52,6 +53,7 @@
             <h1 class="fw-semibold">Add a Todo</h1>
             <button
               type="button"
+              aria-label="Close modal"
               class="btn-close"
               data-bs-dismiss="modal"
             ></button>
@@ -80,7 +82,12 @@
             </form>
           </div>
           <div class="modal-footer">
-            <button type="submit" form="create-todo" class="btn btn-dark">
+            <button
+              type="submit"
+              aria-label="Submit form"
+              form="create-todo"
+              class="btn btn-dark"
+            >
               Create
             </button>
           </div>

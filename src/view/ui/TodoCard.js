@@ -4,7 +4,11 @@ import Utilities from '../../utilities.js';
 
 const TodoCardDelete = (id) => {
   const element = buildTree(
-    E('button', { type: 'button', class: 'btn-close' })
+    E('button', {
+      type: 'button',
+      'aria-label': 'Delete todo',
+      class: 'btn-close',
+    })
   );
 
   const listener = () => {
