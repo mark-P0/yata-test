@@ -15,14 +15,22 @@
 }
 @media only screen and (min-width: 576px) {
   #app {
-    grid-template-rows: calc(100vh - calc(1rem * 2));
     grid-template-rows: initial;
     grid-template-columns: 1fr 4fr;
   }
 }
 
+/*  Workaround to absolutely positioned element scrolling with the parent container
+ *  Padding of the absolute-position element gives it a size,
+ *  within which a fixed-position element can be centered.
+ *  Not entirely sure how it works...
+ *  https://stackoverflow.com/a/40459794
+ */
 #floating-button {
   --size: 3rem;
+  padding: var(--size);
+}
+#floating-button button {
   width: var(--size);
   height: var(--size);
 }
@@ -30,7 +38,6 @@
 main .d-grid {
   display: grid;
   grid-template-columns: repeat(var(--col-ct), 1fr);
-  grid-auto-rows: max-content;
 }
 @media only screen and (min-width: 0px) {
   main .d-grid {

@@ -40,7 +40,7 @@ const TodoCard = (todo) => {
   const { id, title, description, dueDate, priority } = todo;
 
   const card = buildTree(
-    E('section', { class: 'card text-dark' }, [
+    E('section', { class: 'card shadow text-dark' }, [
       TodoCardBody(id, title, description),
       TodoCardFooter(dueDate),
     ])
