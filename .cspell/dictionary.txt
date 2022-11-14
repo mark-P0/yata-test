@@ -1,3 +1,4 @@
 yata
 todos
 fullscreen
+flaticon
