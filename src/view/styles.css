@@ -1,0 +1,62 @@
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#app {
+  display: grid;
+}
+@media only screen and (min-width: 0px) {
+  #app {
+    grid-template-rows: min-content 1fr;
+    grid-template-columns: initial;
+  }
+}
+@media only screen and (min-width: 576px) {
+  #app {
+    grid-template-rows: calc(100vh - calc(1rem * 2));
+    grid-template-rows: initial;
+    grid-template-columns: 1fr 4fr;
+  }
+}
+
+#floating-button {
+  --size: 3rem;
+  width: var(--size);
+  height: var(--size);
+}
+
+main .d-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--col-ct), 1fr);
+  grid-auto-rows: max-content;
+}
+@media only screen and (min-width: 0px) {
+  main .d-grid {
+    --col-ct: 1;
+  }
+}
+@media only screen and (min-width: 576px) {
+  main .d-grid {
+    --col-ct: 2;
+  }
+}
+@media only screen and (min-width: 992px) {
+  main .d-grid {
+    --col-ct: 3;
+  }
+}
+
+main .d-grid .card {
+  /*  Color variable set via JS
+   *  `Element.style.setProperty(var, value)`
+   *  https://css-tricks.com/updating-a-css-variable-with-javascript/
+   */
+
+  border: none;
+  border-left: var(--bs-card-border-radius) solid hsl(var(--hint-hue) 100% 50%);
+}
+main .d-grid .card .card-footer {
+  font-size: smaller;
+}

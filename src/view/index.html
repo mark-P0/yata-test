@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Bootstrap -->
+    <!-- TODO: Import selectively from JS via Webpack -->
+    <link
+      rel="stylesheet"
+      href="../../node_modules/bootstrap/dist/css/bootstrap.min.css"
+    />
+    <script src="../../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="./styles.css" />
+    <script type="module" src="./script.js"></script>
+
+    <title>YATA | Yet Another Todo App</title>
+  </head>
+
+  <body class="position-relative vw-100 vh-100 d-grid gap-3 p-3" id="app">
+    <!-- prettier-ignore -->
+    <aside class="rounded bg-dark text-white vstack gap-3 p-3" id="list-toggle" >
+      <input type="radio" class="btn-check" name="list-toggle" id="todo-list" data-for="list-todos" checked />
+      <label class="btn btn-outline-light rounded-pill" for="todo-list" >Todos</label>
+    </aside>
+
+    <main class="position-relative rounded bg-secondary text-white">
+      <div class="d-grid gap-3 p-3" data-for-list="todo-list">
+        <!-- Will be populated via JS -->
+      </div>
+
+      <div class="position-absolute bottom-0 end-0 p-4">
+        <button
+          type="button"
+          class="btn btn-light rounded-circle flex-center shadow"
+          id="floating-button"
+          data-bs-toggle="modal"
+          data-bs-target="#modal"
+        >
+          +
+        </button>
+      </div>
+    </main>
+
+    <div class="modal fade" id="modal">
+      <div class="modal-dialog">
+        <div class="modal-content" data-for-list="todo-list">
+          <div class="modal-header">
+            <h1 class="fw-semibold">Add a Todo</h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form method="dialog" class="vstack" id="create-todo">
+              <label class="form-label">
+                Title <span class="text-danger fw-bold">*</span>
+                <input class="form-control" name="title" type="text" required />
+              </label>
+              <label class="form-label">
+                Description
+                <input class="form-control" name="description" type="text" />
+              </label>
+              <label class="form-label">
+                Due Date
+                <!-- TODO: Set default date via JS to current -->
+                <!-- prettier-ignore -->
+                <input class="form-control" name="dueDate" type="date" value="2022-12-25" />
+              </label>
+              <label class="form-label">
+                Priority
+                <!-- prettier-ignore -->
+                <input class="form-control" name="priority" type="number" value="0" min="0" max="6" />
+              </label>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" form="create-todo" class="btn btn-dark">
+              Create
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p
+      class="position-absolute top-0 start-0 vw-100 vh-100 bg-white flex-center"
+      id="notice"
+    >
+      This webapp requires JavaScript. Sorry!
+    </p>
+  </body>
+</html>
