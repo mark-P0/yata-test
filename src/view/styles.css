@@ -24,7 +24,7 @@
   width: var(--scrollbar-width-thin);
 }
 .scrollbar-thin::-webkit-scrollbar-thumb {
-  border-radius: var(--bs-border-radius);
+  /* border-radius: var(--bs-border-radius); */
   background-color: var(--scrollbar-color-thumb);
 }
 .scrollbar-thin::-webkit-scrollbar-track {
