@@ -19,18 +19,17 @@
     <title>YATA | Yet Another Todo App</title>
   </head>
 
-  <body
-    class="position-relative vw-100 vh-100 bg-light d-grid gap-3 p-3"
-    id="app"
-  >
+  <body class="position-relative vw-100 vh-100 bg-light d-grid" id="app">
     <!-- prettier-ignore -->
-    <aside class="rounded bg-dark text-white vstack gap-3 p-3" id="list-toggle" >
+    <aside class="bg-dark text-white vstack gap-3 p-3" id="list-toggle" >
       <input type="radio" class="btn-check" name="list-toggle" id="todo-list" data-for="list-todos" checked />
-      <label class="btn btn-outline-light rounded-pill" for="todo-list" >Todos</label>
+      <label class="btn btn-outline-light rounded-pill fw-bold" for="todo-list" >Todos</label>
     </aside>
 
-    <main class="position-relative rounded text-white pb-5 overflow-auto">
-      <div class="d-grid gap-3 pe-3 pb-3" data-for-list="todo-list">
+    <main
+      class="position-relative rounded text-white pb-5 overflow-auto scrollbar-thin"
+    >
+      <div class="d-grid gap-3 m-3" data-for-list="todo-list">
         <!-- Will be populated via JS -->
       </div>
 
