@@ -1,7 +1,8 @@
 {
   "name": "Yet Another Todo App",
   "short_name": "YATA!",
-  "start_url": "/src/view",
+  "description": "Get your tasks done with this Yet Another Todo App!",
+  "start_url": "/src/",
   "icons": [
     {
       "src": "icon.png",
