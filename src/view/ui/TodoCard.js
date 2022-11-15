@@ -1,4 +1,4 @@
-import { E, buildTree } from './__dom__.js';
+import { E, buildTree } from '../__dom__.js';
 import { Events } from '../../controller/pubsub.js';
 import Utilities from '../../scripts/utilities.js';
 

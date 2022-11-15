@@ -1,6 +1,5 @@
-// console.clear();
-
 import './model/todo.js';
+import ListToggles from './view/ui/ListToggles.js';
 import './view/ui/TodoForm.js';
 import './view/ui/TodoList.js';
 import './view/visibility.js';
@@ -11,4 +10,8 @@ if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('./service-worker.js');
 }
 
+/* Remove JS requirement notice */
 document.getElementById('notice').remove();
+
+/* Build webpage via JS */
+document.body.prepend(ListToggles);
