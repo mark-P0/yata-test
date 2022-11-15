@@ -1,6 +1,6 @@
 import { E, buildTree } from './__dom__.js';
 import { Events } from '../../controller/pubsub.js';
-import Utilities from '../../utilities.js';
+import Utilities from '../../scripts/utilities.js';
 
 const TodoCardDelete = (id) => {
   const element = buildTree(
