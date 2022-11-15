@@ -1,6 +1,10 @@
 import { E, buildTree } from '../__dom__.js';
 
-const ListToggle = (id, labelText, parentId, isChecked = false) => {
+const ListToggleData = {
+  TODO_LIST: { id: 'todo-toggle', label: 'Todos' },
+};
+
+const ListToggle = ({ id, label }, parentId, isChecked = false) => {
   let attributes;
 
   attributes = {
@@ -16,9 +20,9 @@ const ListToggle = (id, labelText, parentId, isChecked = false) => {
     class: 'btn btn-outline-light rounded-pill fw-bold',
     for: id,
   };
-  const label = E('label', attributes, labelText);
+  const labelElement = E('label', attributes, label);
 
-  return [input, label];
+  return [input, labelElement];
 };
 
 const ListToggles = () => {
@@ -26,9 +30,12 @@ const ListToggles = () => {
     class: 'bg-dark text-white vstack gap-3 p-3',
     id: 'list-toggles',
   };
-  const children = [...ListToggle('todo-list', 'Todos', attributes.id, true)];
+  const children = [
+    ...ListToggle(ListToggleData.TODO_LIST, attributes.id, true),
+  ];
 
   return E('aside', attributes, children);
 };
 
 export default buildTree(ListToggles());
+export { ListToggleData };

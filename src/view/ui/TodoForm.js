@@ -1,6 +1,8 @@
 import { Events } from '../../controller/pubsub.js';
 
-const modalContent = document.querySelector('.modal [data-for-list=todo-list]');
+const modalContent = document.querySelector(
+  '.modal [data-for-toggle=todo-toggle]'
+);
 const modalCloser = modalContent.querySelector('.btn-close');
 const TodoForm = modalContent.querySelector('form');
 

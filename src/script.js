@@ -1,7 +1,7 @@
 import './model/todo.js';
 import ListToggles from './view/ui/ListToggles.js';
+import Main from './view/ui/Main.js';
 import './view/ui/TodoForm.js';
-import './view/ui/TodoList.js';
 import './view/visibility.js';
 import './controller/local-storage.js';
 
@@ -14,4 +14,4 @@ if ('serviceWorker' in navigator) {
 document.getElementById('notice').remove();
 
 /* Build webpage via JS */
-document.body.prepend(ListToggles);
+document.body.prepend(ListToggles, Main);

@@ -42,29 +42,9 @@
   </head>
 
   <body class="position-relative vw-100 vh-100 bg-light d-grid" id="app">
-    <main
-      class="position-relative rounded text-white pb-5 overflow-auto scrollbar-thin"
-    >
-      <div class="d-grid gap-3 m-3" data-for-list="todo-list">
-        <!-- Will be populated via JS -->
-      </div>
-
-      <div class="position-absolute bottom-0 end-0" id="floating-button">
-        <button
-          type="button"
-          aria-label="Open modal"
-          data-bs-toggle="modal"
-          data-bs-target="#modal"
-          class="position-fixed translate-middle btn btn-dark rounded-circle flex-center shadow"
-        >
-          +
-        </button>
-      </div>
-    </main>
-
     <div class="modal fade" id="modal">
       <div class="modal-dialog">
-        <div class="modal-content" data-for-list="todo-list">
+        <div class="modal-content" data-for-toggle="todo-toggle">
           <div class="modal-header">
             <h1 class="fw-semibold">Add a Todo</h1>
             <button
