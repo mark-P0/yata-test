@@ -1,7 +1,8 @@
 import '../model/todo.js';
 import './ui/TodoForm.js';
 import './ui/TodoList.js';
-import '../controller/pubsub.js';
+import './visibility.js';
+import '../controller/local-storage.js';
 
 /* PWA Service Worker */
 if ('serviceWorker' in navigator) {

@@ -4,6 +4,7 @@ import IDGenerator from './id-generator.js';
 const TodoID = IDGenerator();
 const Todo = (title, description, dueDate, priority) => {
   const id = TodoID.next;
+  Events.UPDATE_TODO_ID.publish(id);
 
   /* TODO: Parse date as an actual object */
 
@@ -29,7 +30,7 @@ const Todo = (title, description, dueDate, priority) => {
 };
 
 const TodoList = (() => {
-  const list = [];
+  let list = [];
 
   const add = (todo) => {
     list.push(todo);
@@ -39,10 +40,14 @@ const TodoList = (() => {
     if (idx === -1) return;
     list.splice(idx, 1);
   };
+  const set = (storedList) => {
+    list = storedList;
+  };
 
   return {
     add,
     remove,
+    set,
 
     get items() {
       list.slice();
@@ -51,6 +56,13 @@ const TodoList = (() => {
   };
 })();
 
+Events.REFRESH_TODO_ID.subscribe((storedCount) => {
+  if (storedCount) TodoID.set(storedCount);
+});
+Events.REFRESH_TODO_LIST.subscribe((storedList) => {
+  if (storedList) TodoList.set(storedList);
+  Events.UPDATE_TODO_LIST.publish(TodoList.items);
+});
 Events.CREATE_TODO.subscribe((data) => {
   const args = Object.values(data);
   const todo = Todo(...args);

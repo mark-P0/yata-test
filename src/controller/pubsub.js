@@ -13,8 +13,13 @@ const Event = () => {
 
 const Events = {
   CREATE_TODO: Event(),
-  UPDATE_TODO_LIST: Event(),
   DELETE_TODO: Event(),
+
+  REFRESH_TODO_LIST: Event(),
+  UPDATE_TODO_LIST: Event(),
+
+  REFRESH_TODO_ID: Event(),
+  UPDATE_TODO_ID: Event(),
 };
 
 export { Events };
