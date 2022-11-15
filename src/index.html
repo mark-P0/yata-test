@@ -42,55 +42,6 @@
   </head>
 
   <body class="position-relative vw-100 vh-100 bg-light d-grid" id="app">
-    <div class="modal fade" id="modal">
-      <div class="modal-dialog">
-        <div class="modal-content" data-for-toggle="todo-toggle">
-          <div class="modal-header">
-            <h1 class="fw-semibold">Add a Todo</h1>
-            <button
-              type="button"
-              aria-label="Close modal"
-              class="btn-close"
-              data-bs-dismiss="modal"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <form method="dialog" class="vstack" id="create-todo">
-              <label class="form-label">
-                Title <span class="text-danger fw-bold">*</span>
-                <input class="form-control" name="title" type="text" required />
-              </label>
-              <label class="form-label">
-                Description
-                <input class="form-control" name="description" type="text" />
-              </label>
-              <label class="form-label">
-                Due Date
-                <!-- TODO: Set default date via JS to current -->
-                <!-- prettier-ignore -->
-                <input class="form-control" name="dueDate" type="date" value="2022-12-25" />
-              </label>
-              <label class="form-label">
-                Priority
-                <!-- prettier-ignore -->
-                <input class="form-control" name="priority" type="number" value="0" min="0" max="6" />
-              </label>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button
-              type="submit"
-              aria-label="Submit form"
-              form="create-todo"
-              class="btn btn-dark"
-            >
-              Create
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <p
       class="position-absolute top-0 start-0 vw-100 vh-100 text-bg-dark opacity-75 flex-center"
       id="notice"

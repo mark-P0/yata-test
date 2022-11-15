@@ -3,10 +3,10 @@ import { ListToggleData } from './ListToggles.js';
 import { E, buildTree } from '../__dom__.js';
 import { Events } from '../../controller/pubsub.js';
 
-const List = (listToggleId) => {
+const List = (toggleId) => {
   const attributes = {
     class: 'd-grid gap-3 m-3',
-    'data-for-toggle': listToggleId,
+    'data-for-toggle': toggleId,
   };
   return E('div', attributes);
 };
