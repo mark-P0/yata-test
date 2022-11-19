@@ -39,13 +39,17 @@ export default {
       /* PWA compliance */
       favicon: './src/assets/icon.png',
     }),
-    new MiniCssExtractPlugin(),
+    new MiniCssExtractPlugin({ filename: 'styles.css' }),
   ],
   module: {
     rules: [
       {
         test: /\.css$/i,
         use: [MiniCssExtractPlugin.loader, 'css-loader'],
+      },
+      {
+        test: /\.s[ac]ss$/i,
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
       },
     ],
   },

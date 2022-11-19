@@ -1,8 +1,5 @@
-/* TODO: Import Bootstrap components selectively */
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import '../node_modules/bootstrap/dist/js/bootstrap.min.js';
-
-import './styles.css';
+import './view/bootstrap.js';
+import './view/styles.css';
 
 import './model/todo.js';
 import ListToggles from './view/ui/ListToggles.js';
