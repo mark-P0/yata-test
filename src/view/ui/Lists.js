@@ -5,7 +5,7 @@ import { Events } from '../../controller/pubsub.js';
 
 const List = (toggleId) => {
   const attributes = {
-    class: 'd-grid gap-3 m-3',
+    class: 'd-grid gap-3',
     'data-for-toggle': toggleId,
   };
   return E('div', attributes);

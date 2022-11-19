@@ -39,11 +39,20 @@
     grid-template-rows: min-content 1fr;
     grid-template-columns: initial;
   }
+  main {
+    padding: 1rem;
+  }
 }
 @media only screen and (min-width: 576px) {
   #app {
     grid-template-rows: initial;
     grid-template-columns: 1fr 4fr;
+  }
+}
+@media only screen and (min-width: 992px) {
+  aside {
+    margin: 1rem;
+    border-radius: var(--bs-border-radius);
   }
 }
 

@@ -4,7 +4,7 @@ import { E } from '../__dom__.js';
 
 const Main = () => {
   const attributes = {
-    class: 'position-relative bg-white pb-5 overflow-auto scrollbar-thin',
+    class: 'position-relative pb-5 overflow-auto scrollbar-thin',
   };
   const children = [TodoList, FloatingButton];
 
