@@ -10,8 +10,7 @@ if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('./service-worker.js');
 }
 
-/* Remove JS requirement notice */
-document.getElementById('notice').remove();
-
-/* Build webpage via JS */
-document.body.prepend(ListToggles, Main, Modal);
+/*  Build webpage via JS
+ *  Also removes the JS requirement notice
+ */
+document.body.replaceChildren(ListToggles, Main, Modal);
