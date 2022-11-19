@@ -1,4 +1,4 @@
-import { E, buildTree } from '../__dom__.js';
+import { E } from '../__dom__.js';
 
 const Button = (text) => {
   const attributes = {
@@ -22,4 +22,4 @@ const FloatingButton = () => {
   return E('div', attributes, [Button('+')]);
 };
 
-export default buildTree(FloatingButton());
+export default FloatingButton();

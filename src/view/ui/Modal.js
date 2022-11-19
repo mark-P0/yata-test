@@ -1,12 +1,10 @@
 import { NewTodoModalContentForm } from './ModalContents.js';
-import { E, buildTree } from '../__dom__.js';
+import { E } from '../__dom__.js';
 
 const Modal = () => {
-  const dialog = E('div', { class: 'modal-dialog' }, [
-    E(NewTodoModalContentForm),
+  return E('div', { class: 'modal fade', id: 'modal' }, [
+    E('div', { class: 'modal-dialog' }, [NewTodoModalContentForm]),
   ]);
-  const modal = E('div', { class: 'modal fade', id: 'modal' }, [dialog]);
-  return modal;
 };
 
-export default buildTree(Modal());
+export default Modal();

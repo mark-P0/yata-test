@@ -1,5 +1,5 @@
 import { ListToggleData } from './ListToggles.js';
-import { E, buildTree } from '../__dom__.js';
+import { E } from '../__dom__.js';
 import { FormInput, FormLabel, FormLabelRequiredHint } from './Forms.js';
 import { Events } from '../../controller/pubsub.js';
 
@@ -38,7 +38,7 @@ function parseDate(date) {
 }
 
 const NewTodoModalContentForm = (() => {
-  const flavorText = 'Create a New Todo';
+  const title = 'Create a New Todo';
   const currentDate = parseDate(new Date());
 
   /* prettier-ignore */
@@ -59,13 +59,12 @@ const NewTodoModalContentForm = (() => {
     E('button', 'Create', {
       type: 'submit',
       class: 'btn btn-dark mt-3',
-      'aria-label': flavorText,
+      'aria-label': title,
     }),
   ]);
 
-  const modalContent = buildTree(
-    ModalContent(ListToggleData.TODO_LIST.id, flavorText, [form])
-  );
+  const toggleId = ListToggleData.TODO_LIST.id;
+  const modalContent = ModalContent(toggleId, title, [form]);
   const closerElement = modalContent.querySelector('.btn-close');
   const formElement = modalContent.querySelector('form');
 

@@ -1,4 +1,4 @@
-import { E, buildTree } from '../__dom__.js';
+import { E } from '../__dom__.js';
 
 const ListToggleData = {
   TODO_LIST: { id: 'todo-toggle', label: 'Todos' },
@@ -32,10 +32,11 @@ const ListToggles = () => {
   };
   const children = [
     ...ListToggle(ListToggleData.TODO_LIST, attributes.id, true),
+    /* May have more `ListToggle`s in the future */
   ];
 
   return E('aside', attributes, children);
 };
 
-export default buildTree(ListToggles());
+export default ListToggles();
 export { ListToggleData };
