@@ -2,7 +2,6 @@ import { ListToggleData } from './ListToggles.js';
 import { E, buildTree } from '../__dom__.js';
 import { FormInput, FormLabel, FormLabelRequiredHint } from './Forms.js';
 import { Events } from '../../controller/pubsub.js';
-import { format } from '../../../node_modules/date-fns/esm/index.js';
 
 const ModalContentHeader = (title) => {
   const heading = E('h1', { class: 'fw-semibold' }, title);
@@ -30,9 +29,17 @@ const ModalContent = (toggleId, title, elements) => {
   return E('div', attributes, children);
 };
 
+function parseDate(date) {
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+
+  return `${year}-${month}-${day}`;
+}
+
 const NewTodoModalContentForm = (() => {
   const flavorText = 'Create a New Todo';
-  const currentDate = format(new Date(), 'yyyy-LL-dd');
+  const currentDate = parseDate(new Date());
 
   /* prettier-ignore */
   const form = E('form', { method: 'dialog', class: 'vstack' }, [

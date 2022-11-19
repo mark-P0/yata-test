@@ -7,7 +7,6 @@ Get your tasks done with this _**Yet Another Todo App**_!
 ## Frameworks
 
 - [Bootstrap](https://getbootstrap.com/)
-- [`date-fns`](https://date-fns.org/)
 
 ## Credits
 
