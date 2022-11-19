@@ -1,25 +1,26 @@
-const Event = () => {
-  const subscribers = [];
+class Event {
+  #subscribers;
+  constructor() {
+    this.#subscribers = [];
+  }
 
-  const publish = (data) => {
-    for (const callback of subscribers) callback(data);
-  };
-  const subscribe = (callback) => {
-    subscribers.push(callback);
-  };
-
-  return { publish, subscribe };
-};
+  publish(data) {
+    for (const callback of this.#subscribers) callback(data);
+  }
+  subscribe(callback) {
+    this.#subscribers.push(callback);
+  }
+}
 
 const Events = {
-  CREATE_TODO: Event(),
-  DELETE_TODO: Event(),
+  CREATE_TODO: new Event(),
+  DELETE_TODO: new Event(),
 
-  REFRESH_TODO_LIST: Event(),
-  UPDATE_TODO_LIST: Event(),
+  REFRESH_TODO_LIST: new Event(),
+  UPDATE_TODO_LIST: new Event(),
 
-  REFRESH_TODO_ID: Event(),
-  UPDATE_TODO_ID: Event(),
+  REFRESH_TODO_ID: new Event(),
+  UPDATE_TODO_ID: new Event(),
 };
 
 export { Events };
