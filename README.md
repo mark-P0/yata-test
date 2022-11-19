@@ -6,6 +6,7 @@ Get your tasks done with this _**Yet Another Todo App**_!
 
 ## Frameworks
 
+- [Webpack](https://webpack.js.org/)
 - [Bootstrap](https://getbootstrap.com/)
 
 ## Credits
