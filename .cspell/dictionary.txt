@@ -2,3 +2,4 @@ yata
 todos
 fullscreen
 flaticon
+favicons
