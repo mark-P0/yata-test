@@ -4,10 +4,9 @@ import WorkboxPlugin from 'workbox-webpack-plugin';
 import FaviconsWebpackPlugin from 'favicons-webpack-plugin';
 
 const AppInfo = {
-  name: 'Yet Another Todo Application',
-  abbreviation: 'YATA!',
+  name: 'YATA!',
   description: 'Get your tasks done with this Yet Another Todo App!',
-  author: 'Mark',
+  baseUrl: '/yata/?homescreen=1', // Will be a GitHub Pages subdirectory
   color: {
     /* Bootstrap's Light and Dark colors */
     theme: '#212529',
@@ -23,10 +22,10 @@ export default (env) => {
   const plugins = [
     new HtmlWebpackPlugin({
       /* Descriptors; includes Open Graph information */
-      title: AppInfo.abbreviation,
+      title: AppInfo.name,
       meta: {
         description: AppInfo.description,
-        'og:title': AppInfo.abbreviation,
+        'og:title': AppInfo.name,
         'og:description': AppInfo.description,
       },
     }),
@@ -38,11 +37,20 @@ export default (env) => {
      */
     new FaviconsWebpackPlugin({
       logo: AppInfo.logo,
-      logoMaskable: AppInfo.logo, // PWA
+
+      /*  Info for app manifest
+       *  https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json
+       *  https://web.dev/add-manifest/
+       *  https://github.com/itgalaxy/favicons#usage
+       *  https://github.com/jantimon/favicons-webpack-plugin#basic
+       */
       favicons: {
         appName: AppInfo.name,
-        appShortName: AppInfo.abbreviation,
+        appShortName: AppInfo.name,
         appDescription: AppInfo.description,
+        start_url: AppInfo.baseUrl,
+        theme_color: AppInfo.color.theme,
+        background: AppInfo.color.background,
       },
     }),
   ];
