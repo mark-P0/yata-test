@@ -45,6 +45,7 @@ const Plugins = {
    *  Found through fork: https://www.npmjs.com/package/app-manifest-webpack-plugin
    */
   FaviconsManifest: new FaviconsWebpackPlugin({
+    devMode: 'webapp', // Behave like a proper build even in development
     logo: AppInfo.logo,
 
     /*  Info for app manifest
