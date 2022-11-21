@@ -1,7 +1,5 @@
 import { Events } from '../controller/pubsub.js';
-import IDGenerator from './id-generator.js';
 
-const TodoID = IDGenerator();
 class Todo {
   id;
   type;
@@ -11,7 +9,7 @@ class Todo {
   priority;
 
   constructor(title, description, dueDate, priority) {
-    this.id = TodoID.next;
+    this.id = crypto.randomUUID();
     this.type = this.constructor.name;
 
     this.title = title;
@@ -48,9 +46,6 @@ const TodoList = (() => {
   };
 })();
 
-Events.REFRESH_TODO_ID.subscribe((storedCount) => {
-  if (storedCount) TodoID.set(storedCount);
-});
 Events.REFRESH_TODO_LIST.subscribe((storedList) => {
   if (storedList) TodoList.set(storedList);
   Events.UPDATE_TODO_LIST.publish(TodoList.items);

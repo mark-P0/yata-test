@@ -18,9 +18,6 @@ const Events = {
 
   REFRESH_TODO_LIST: new Event(),
   UPDATE_TODO_LIST: new Event(),
-
-  REFRESH_TODO_ID: new Event(),
-  UPDATE_TODO_ID: new Event(),
 };
 
 export { Events };

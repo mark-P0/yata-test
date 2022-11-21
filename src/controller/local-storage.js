@@ -6,11 +6,6 @@ const data = [
     refreshEvent: Events.REFRESH_TODO_LIST,
     updateEvent: Events.UPDATE_TODO_LIST,
   },
-  {
-    key: 'TodoID',
-    refreshEvent: Events.REFRESH_TODO_ID,
-    updateEvent: Events.UPDATE_TODO_ID,
-  },
 ];
 
 for (const { key, refreshEvent, updateEvent } of data) {
