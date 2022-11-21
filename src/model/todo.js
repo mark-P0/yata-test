@@ -2,32 +2,24 @@ import { Events } from '../controller/pubsub.js';
 import IDGenerator from './id-generator.js';
 
 const TodoID = IDGenerator();
-const Todo = (title, description, dueDate, priority) => {
-  const id = TodoID.next;
-  Events.UPDATE_TODO_ID.publish(id);
+class Todo {
+  id;
+  type;
+  title;
+  description;
+  dueDate;
+  priority;
 
-  /* TODO: Parse date as an actual object */
+  constructor(title, description, dueDate, priority) {
+    this.id = TodoID.next;
+    this.type = this.constructor.name;
 
-  priority = Number.parseInt(priority) || 0;
-
-  return {
-    get id() {
-      return id;
-    },
-    get title() {
-      return title;
-    },
-    get description() {
-      return description;
-    },
-    get dueDate() {
-      return dueDate;
-    },
-    get priority() {
-      return priority;
-    },
-  };
-};
+    this.title = title;
+    this.description = description;
+    this.dueDate = dueDate;
+    this.priority = Number.parseInt(priority) || 0;
+  }
+}
 
 const TodoList = (() => {
   let list = [];
@@ -65,7 +57,7 @@ Events.REFRESH_TODO_LIST.subscribe((storedList) => {
 });
 Events.CREATE_TODO.subscribe((data) => {
   const args = Object.values(data);
-  const todo = Todo(...args);
+  const todo = new Todo(...args);
 
   TodoList.add(todo);
   Events.UPDATE_TODO_LIST.publish(TodoList.items);
