@@ -32,28 +32,18 @@ class Todo {
 }
 
 const TodoList = (() => {
-  let list = [];
-
-  const add = (todo) => {
-    list.push(todo);
-  };
-  const remove = (todoId) => {
-    const idx = list.findIndex((todo) => todo.id === todoId);
-    if (idx === -1) return;
-    list.splice(idx, 1);
-  };
-  const set = (storedList) => {
-    list = storedList;
-  };
+  let list = {};
 
   return {
-    add,
-    remove,
-    set,
+    add(todo) {
+      list[todo.id] = todo;
+    },
+    remove(todoId) {
+      delete list[todoId];
+    },
 
     get items() {
-      list.slice();
-      return [...list];
+      return Object.values(list);
     },
   };
 })();
