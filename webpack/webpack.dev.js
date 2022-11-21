@@ -16,11 +16,13 @@ export default {
     static: './dist/',
     host: '0.0.0.0', // Broadcast on the network
 
-    /* Self-signed certificate; flagged as insecure.
-     * `localhost` is "secure" even on HTTP.
+    /*  Self-signed certificate; flagged as insecure.
+     *  `localhost` is "secure" even on HTTP.
      *  https://web.dev/how-to-use-local-https/
+     *
+     *  For some reason, Webpack's server goes into an infinite refresh loop without this...
      */
-    // server: 'https',
+    server: 'https',
   },
 
   /* Modifiers | Customizations | Additional Functionalities */
