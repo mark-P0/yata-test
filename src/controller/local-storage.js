@@ -1,18 +1,15 @@
 import { Events } from './pubsub.js';
 
-const data = [
-  {
-    key: 'TodoList',
-    refreshEvent: Events.REFRESH_TODO_LIST,
-    updateEvent: Events.UPDATE_TODO_LIST,
-  },
-];
+Events.CREATE_STORAGE_ENTRY.subscribe((entry) => {
+  const { key, value } = entry;
+  localStorage.setItem(key, value);
+});
 
-for (const { key, refreshEvent, updateEvent } of data) {
-  const storedValue = localStorage.getItem(key);
-  refreshEvent.publish(JSON.parse(storedValue));
-
-  updateEvent.subscribe((valueToStore) => {
-    localStorage.setItem(key, JSON.stringify(valueToStore));
-  });
+for (const [key, value] of Object.entries(localStorage)) {
+  const entry = { key, value };
+  Events.READ_STORAGE_ENTRY.publish(entry);
 }
+
+Events.DELETE_STORAGE_ENTRY.subscribe((key) => {
+  localStorage.removeItem(key);
+});

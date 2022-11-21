@@ -1,17 +1,8 @@
-const IDGenerator = () => {
-  let count = 0;
+function generateId(prefix) {
+  let id = crypto.randomUUID();
+  if (prefix) id = `${prefix};${id}`;
 
-  const set = (storedCount) => {
-    count = Number.parseInt(storedCount) + 1;
-  };
+  return id;
+}
 
-  return {
-    set,
-
-    get next() {
-      return '0x' + (count++).toString(16).toUpperCase();
-    },
-  };
-};
-
-export default IDGenerator;
+export { generateId };
