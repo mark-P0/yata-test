@@ -2,3 +2,4 @@
 
 import './bootstrap.scss';
 import 'bootstrap/js/dist/modal.js';
+import 'bootstrap-icons/font/bootstrap-icons.css';
