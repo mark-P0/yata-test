@@ -45,7 +45,7 @@ const NewTodoModalContentForm = (() => {
   const form = E('form', { method: 'dialog', class: 'vstack' }, [
     FormLabel('Title', [
       FormLabelRequiredHint,
-      FormInput('title', { type: 'text', required: true }),
+      FormInput('title', { type: 'text', required: true }, true),
     ]),
     FormLabel('Description', [
       FormInput('description', { type: 'text' }),

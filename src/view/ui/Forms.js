@@ -8,8 +8,16 @@ const FormLabel = (label, nestedElements) => {
   return E('label', { class: 'form-label' }, children);
 };
 
-const FormInput = (name, attributes) => {
-  return E('input', { class: 'form-control', name, ...attributes });
+const FormInput = (name, attributes, isFocusDefault = false) => {
+  const element = E('input', { class: 'form-control', name, ...attributes });
+
+  if (isFocusDefault) {
+    document.addEventListener('shown.bs.modal', () => {
+      element.focus();
+    });
+  }
+
+  return element;
 };
 
 export { FormLabelRequiredHint, FormLabel, FormInput };
