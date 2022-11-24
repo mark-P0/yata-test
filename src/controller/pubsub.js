@@ -13,6 +13,8 @@ class Event {
 }
 
 const Events = {
+  INITIALIZATION: new Event(),
+
   CREATE_TODO: new Event(),
   DELETE_TODO: new Event(),
   UPDATE_TODO_LIST: new Event(),

@@ -7,13 +7,8 @@ const ListToggleData = {
 const ListToggle = ({ id, label }, parentId, isChecked = false) => {
   let attributes;
 
-  attributes = {
-    type: 'radio',
-    class: 'btn-check',
-    name: parentId,
-    id,
-  };
-  if (isChecked) Object.assign(attributes, { checked: true });
+  attributes = { class: 'btn-check', type: 'radio', name: parentId, id };
+  if (isChecked) attributes.checked = true;
   const input = E('input', attributes);
 
   attributes = {

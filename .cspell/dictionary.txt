@@ -4,3 +4,4 @@ fullscreen
 flaticon
 favicons
 homescreen
+kanban
