@@ -29,13 +29,10 @@ const TodoCardBody = (id, title, description) => {
 };
 
 const TodoCardFooter = (dueDate) => {
-  const text = E('span', { class: 'text-end w-100' }, [
-    E('#text', 'Due on '),
-    E('strong', dueDate),
-  ]);
-
-  const attrs = { class: 'card-footer hstack gap-3 bg-white text-secondary' };
-  return E('div', attrs, [text]);
+  const attributes = {
+    class: 'card-footer bg-white text-secondary text-end fs-smaller',
+  };
+  return E('div', attributes, [E('#text', 'Due on '), E('strong', dueDate)]);
 };
 
 const TodoCard = (todo) => {

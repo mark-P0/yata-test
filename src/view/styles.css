@@ -3,6 +3,9 @@
   justify-content: center;
   align-items: center;
 }
+.fs-smaller {
+  font-size: smaller;
+}
 
 .scrollbar-thin {
   --scrollbar-width-thin: 0.5rem;
@@ -99,7 +102,4 @@ main .d-grid .card {
 
   border: none;
   border-left: var(--bs-card-border-radius) solid hsl(var(--hint-hue) 50% 50%);
-}
-main .d-grid .card .card-footer {
-  font-size: smaller;
 }
