@@ -1,3 +1,4 @@
+import path from 'node:path';
 import { Plugins, Loaders } from './webpack.plugins.js';
 
 /** @type {import('webpack').Configuration} */
@@ -7,6 +8,12 @@ export default {
   output: {
     filename: 'script.js',
     clean: true,
+  },
+  resolve: {
+    /* Import shorthands */
+    alias: {
+      src: path.resolve(process.cwd(), 'src'),
+    },
   },
 
   /* Mode-specific */

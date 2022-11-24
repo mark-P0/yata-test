@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    /*  For providing IntelliSense to Webpack aliases
+     *  https://stackoverflow.com/a/47186185/
+     *  https://medium.com/@justintulk/solve-module-import-aliasing-for-webpack-jest-and-vscode-74007ce4adc9
+     */
+    "paths": {
+      "src/*": ["./src/*"]
+    }
+  },
+  "exclude": ["node_modules", "dist"]
+}
