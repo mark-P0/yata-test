@@ -1,8 +1,6 @@
-function generateId(prefix) {
-  let id = crypto.randomUUID();
-  if (prefix) id = `${prefix};${id}`;
-
-  return id;
+function generateId(prefix, separator = '_') {
+  const id = crypto.randomUUID();
+  return `${prefix}${separator}${id}`;
 }
 
 export { generateId };
