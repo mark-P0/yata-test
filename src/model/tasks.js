@@ -10,7 +10,7 @@ class Task {
   #dueDate;
   priority;
   constructor(type, title, description, dueDate, priority) {
-    this.id = this.constructor.#typeIsId ? type : generateId(type);
+    this.id = Task.#typeIsId ? type : generateId(type);
     this.title = title;
     this.description = description;
     this.#dueDate = new TaskDate(dueDate);
