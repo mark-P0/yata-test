@@ -1,4 +1,7 @@
-/* DOM element representation */
+/**
+ * DOM element representation
+ * @type {(name: string, ...properties: any) => HTMLElement}
+ */
 function E(name, ...properties) {
   let attributes = {};
   let text = '';
