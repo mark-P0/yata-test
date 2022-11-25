@@ -1,8 +1,7 @@
 import './view/bootstrap.js';
 import './view/styles.css';
 
-import './model/todo.js';
-import './model/lists.js';
+import './model/task-lists.js';
 import './model/display.js';
 import ListToggles from './view/ui/ListToggles.js';
 import Main from './view/ui/Main.js';

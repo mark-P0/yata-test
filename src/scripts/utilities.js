@@ -30,4 +30,23 @@ const Utilities = {
   },
 };
 
+function BidirectionalMap(map) {
+  /*  https://stackoverflow.com/a/21070876
+   *  https://stackoverflow.com/a/32623259
+   *  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy#examples
+   */
+
+  const fwd = map ?? {};
+  const bwd = {};
+  for (const key in map) bwd[map[key]] = key;
+
+  const indexer = {
+    get: (_, key) => fwd[key] ?? bwd[key],
+    set: (_, key, val) => (fwd[key] = val) && (bwd[val] = key),
+  };
+
+  return new Proxy({ fwd, bwd }, indexer);
+}
+
 export default Utilities;
+export { BidirectionalMap };

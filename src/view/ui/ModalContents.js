@@ -1,6 +1,7 @@
+import { FormInput, FormLabel, FormLabelRequiredHint } from './Forms.js';
 import { ListToggleData } from './ListToggles.js';
 import { E } from '../__dom__.js';
-import { FormInput, FormLabel, FormLabelRequiredHint } from './Forms.js';
+import ModelIDs from 'src/model/model-ids.js';
 import { Events } from '../../controller/pubsub.js';
 
 const ModalContentHeader = (title) => {
@@ -72,7 +73,10 @@ const NewTodoModalContentForm = (() => {
     const formData = new FormData(formElement);
     const todoProps = Object.fromEntries(formData);
 
-    Events.CREATE_TODO.publish(todoProps);
+    Events.CREATE_TASK.publish({
+      type: ModelIDs.TODO,
+      data: todoProps,
+    });
     closerElement.click();
     formElement.reset();
   });

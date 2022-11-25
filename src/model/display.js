@@ -1,19 +1,15 @@
 import { Events } from '../controller/pubsub.js';
+import ModelIDs from './model-ids.js';
 
-const Display = (() => {
-  let items = null;
+const Display = {
+  src: ModelIDs.TODO, // Hard-code for now
+  items: null,
+};
 
-  return {
-    get items() {
-      return items;
-    },
-    set items(newItems) {
-      items = newItems;
-      Events.EMIT_DISPLAY.publish(items);
-    },
-  };
-})();
+Events.UPDATE_DISPLAY.subscribe((items) => {
+  const { type, data } = items;
+  if (type !== Display.src) return;
 
-Events.UPDATE_TODO_LIST.subscribe((items) => {
   Display.items = items;
+  Events.EMIT_DISPLAY.publish(data);
 });

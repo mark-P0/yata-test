@@ -15,8 +15,8 @@ class Event {
 const Events = {
   INITIALIZATION: new Event(),
 
-  CREATE_TODO: new Event(),
-  DELETE_TODO: new Event(),
+  CREATE_TASK: new Event(),
+  DELETE_TASK: new Event(),
 
   CREATE_STORAGE_ENTRY: new Event(),
   READ_STORAGE_ENTRY: new Event(),
