@@ -2,6 +2,7 @@ import { FormInput, FormLabel, FormLabelRequiredHint } from './Forms.js';
 import { ListToggleData } from './ListToggles.js';
 import { E } from '../__dom__.js';
 import ModelIDs from 'src/model/model-ids.js';
+import { TaskDate } from 'src/model/task-dates.js';
 import { Events } from '../../controller/pubsub.js';
 
 const ModalContentHeader = (title) => {
@@ -30,17 +31,9 @@ const ModalContent = (toggleId, title, elements) => {
   return E('div', attributes, children);
 };
 
-function parseDate(date) {
-  const year = date.getFullYear();
-  const month = date.getMonth() + 1;
-  const day = date.getDate();
-
-  return `${year}-${month}-${day}`;
-}
-
 const NewTodoModalContentForm = (() => {
   const title = 'Create a New Todo';
-  const currentDate = parseDate(new Date());
+  const currentDate = `${TaskDate.current}`;
 
   /* prettier-ignore */
   const form = E('form', { method: 'dialog', class: 'vstack' }, [

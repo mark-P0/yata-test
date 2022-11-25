@@ -1,3 +1,4 @@
+import { TaskDate } from './task-dates.js';
 import { generateId } from './id-generator.js';
 
 class Task {
@@ -6,14 +7,17 @@ class Task {
   id;
   title;
   description;
-  dueDate;
+  #dueDate;
   priority;
   constructor(type, title, description, dueDate, priority) {
     this.id = this.constructor.#typeIsId ? type : generateId(type);
     this.title = title;
     this.description = description;
-    this.dueDate = dueDate;
+    this.#dueDate = new TaskDate(dueDate);
     this.priority = Number.parseInt(priority) || 0;
+  }
+  get dueDate() {
+    return `${this.#dueDate}`;
   }
 
   static serialize(instance) {
