@@ -46,7 +46,7 @@ const NewTodoModalContentForm = (() => {
   const form = E('form', { method: 'dialog', class: 'vstack' }, [
     FormLabel('Title', [
       FormLabelRequiredHint,
-      FormInput('title', { type: 'text', required: true }, true),
+      FormInput('title', { type: 'text', required: true, autofocus: true }),
     ]),
     FormLabel('Description', [
       FormInput('description', { type: 'text' }),
@@ -63,6 +63,18 @@ const NewTodoModalContentForm = (() => {
       'aria-label': title,
     }),
   ]);
+
+  const defaultFocusElement = form.querySelector('[autofocus]');
+  if (defaultFocusElement) {
+    /*  The `autofocus` attribute, if present, will not actually do anything meaningful.
+     *  It auto-focuses to the attribute "on page load". The intention here is to focus on the input
+     *  "when the modal is shown". This "technique" is also outlined on Bootstrap's docs.
+     *  https://getbootstrap.com/docs/5.2/components/modal/#how-it-works
+     */
+    document.addEventListener('shown.bs.modal', () => {
+      defaultFocusElement.focus();
+    });
+  }
 
   const toggleId = ListToggleData.TODO_LIST.id;
   const modalContent = ModalContent(toggleId, title, [form]);
