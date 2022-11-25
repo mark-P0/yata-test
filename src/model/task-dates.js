@@ -5,21 +5,20 @@ class TaskDate {
   /** @type {(datetime: string) => Date} */
   static parse(datetime) {
     const [date, time] = datetime.split('_');
-    const base = new Date();
 
     const [year, month, day] = date
       .split('-')
       .map((part) => Number.parseInt(part));
-    base.setFullYear(year, month - 1, day);
 
+    let hours, minutes, seconds;
+    hours = minutes = seconds = null;
     if (time) {
-      const [hours, minutes, seconds] = time
+      [hours, minutes, seconds] = time
         .split(':')
         .map((part) => Number.parseInt(part));
-      base.setHours(hours, minutes, seconds);
     }
 
-    return base;
+    return new Date(year, month - 1, day, hours, minutes, seconds);
   }
   /** @type {(obj: Date, as: {date: boolean, time: boolean}) => string} */
   static format(obj, { asDate = false, asTime = false } = {}) {
@@ -44,6 +43,13 @@ class TaskDate {
   }
   static get current() {
     return new TaskDate();
+  }
+
+  valueOf() {
+    /*  For supporting arithmetic operations
+     *  Converts date to a primitive value, i.e. a number (milliseconds)
+     */
+    return this.obj.getTime();
   }
   toJSON() {
     /* For supporting `JSON.stringify()` */

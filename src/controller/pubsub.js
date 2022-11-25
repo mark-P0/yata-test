@@ -22,9 +22,8 @@ const Events = {
   READ_STORAGE_ENTRY: new Event(),
   DELETE_STORAGE_ENTRY: new Event(),
 
-  UPDATE_TODO_LIST: new Event(),
-
-  UPDATE_DISPLAY: new Event(),
+  UPDATE_DISPLAY_ITEMS: new Event(),
+  UPDATE_DISPLAY_SORTING: new Event(),
   EMIT_DISPLAY: new Event(),
 };
 

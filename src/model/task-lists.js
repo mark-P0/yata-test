@@ -13,7 +13,7 @@ class TaskList {
 
   add(task) {
     this.#list[task.id] = task;
-    Events.UPDATE_DISPLAY.publish({
+    Events.UPDATE_DISPLAY_ITEMS.publish({
       type: this.#type,
       data: this.items,
     });
@@ -21,7 +21,7 @@ class TaskList {
 
   remove(taskId) {
     delete this.#list[taskId];
-    Events.UPDATE_DISPLAY.publish({
+    Events.UPDATE_DISPLAY_ITEMS.publish({
       type: this.#type,
       data: this.items,
     });

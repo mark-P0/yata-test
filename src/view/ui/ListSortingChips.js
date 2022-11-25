@@ -1,8 +1,18 @@
 import { generateId } from 'src/model/id-generator.js';
+import { SorterIDs } from 'src/model/sorters.js';
 import { E } from '../__dom__.js';
 import { Events } from 'src/controller/pubsub.js';
 
-const SortingChipRadio = (group, text, icon) => {
+const mapSorterData = {
+  [SorterIDs.CREATION_DATE]: { text: 'Creation', icon: 'pencil-square' },
+  [SorterIDs.PRIORITY]: { text: 'Priority', icon: 'exclamation-square' },
+  [SorterIDs.PROJECT]: { text: 'Project', icon: 'kanban' },
+  [SorterIDs.DUE_DATE]: { text: 'Due Date', icon: 'calendar-event' },
+};
+
+const SortingChipRadio = (group, sorterId) => {
+  const { text, icon } = mapSorterData[sorterId];
+
   let attributes;
 
   const id = generateId('HTML');
@@ -22,6 +32,10 @@ const SortingChipRadio = (group, text, icon) => {
   };
   const label = E('label', attributes, text, [background]);
 
+  input.addEventListener('click', () => {
+    Events.UPDATE_DISPLAY_SORTING.publish(sorterId);
+  });
+
   return [input, label];
 };
 
@@ -31,15 +45,15 @@ const ListSortingChips = () => {
   const id = generateId('HTML');
   attributes = {
     class:
-      'w-100 hstack gap-3 px-3 pt-3 py-2 overflow-auto scrollbar scrollbar-thin scrollbar-translucent',
+      'w-100 hstack gap-3 ps-3 pe-5 pt-3 py-2 overflow-auto scrollbar scrollbar-thin scrollbar-translucent',
     id,
   };
   /** @type {HTMLElement} */
   const chips = E('div', attributes, [
-    ...SortingChipRadio(id, 'Creation', 'pencil-square'),
-    ...SortingChipRadio(id, 'Priority', 'exclamation-square'),
-    ...SortingChipRadio(id, 'Project', 'kanban'),
-    ...SortingChipRadio(id, 'Due Date', 'calendar-event'),
+    ...SortingChipRadio(id, SorterIDs.CREATION_DATE),
+    ...SortingChipRadio(id, SorterIDs.PRIORITY),
+    // ...SortingChipRadio(id, SorterIDs.PROJECT),
+    ...SortingChipRadio(id, SorterIDs.DUE_DATE),
   ]);
 
   Events.INITIALIZATION.subscribe(() => {
