@@ -13,7 +13,7 @@ class Task {
     this.title = title;
     this.description = description;
     this.dueDate = dueDate;
-    this.priority = priority;
+    this.priority = Number.parseInt(priority) || 0;
   }
 
   static serialize(instance) {
