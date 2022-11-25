@@ -22,19 +22,26 @@ class Task {
     this.priority = Number.parseInt(priority) || 0;
   }
   get dueDate() {
-    return `${this.#dueDate}`;
+    return this.#dueDate.date;
   }
   get creationDate() {
-    return `${this.#creationDate}`;
+    return this.#creationDate.date;
   }
 
+  /** @type {(instance: Task) => [string, string]} */
   static serialize(instance) {
-    const { id, title, description, dueDate, priority, creationDate } =
-      instance;
-    const object = { title, description, dueDate, priority, creationDate };
+    const { id, title, description, priority } = instance;
+    const object = {
+      title,
+      description,
+      dueDate: instance.#dueDate,
+      priority,
+      creationDate: instance.#creationDate,
+    };
     const string = JSON.stringify(object);
     return [id, string];
   }
+  /** @type {(id: string, string: string) => Task} */
   static deserialize(id, string) {
     const object = JSON.parse(string);
 

@@ -33,7 +33,7 @@ const ModalContent = (toggleId, title, elements) => {
 
 const NewTodoModalContentForm = (() => {
   const title = 'Create a New Todo';
-  const currentDate = `${TaskDate.current}`;
+  const currentDate = TaskDate.current.date;
 
   /* prettier-ignore */
   const form = E('form', { method: 'dialog', class: 'vstack' }, [

@@ -1,32 +1,62 @@
 /**
- * YYYY-MM-DD ⇄ [Date object]
+ * `YYYY-MM-DD_HH:MM:SS` ⇄ `[Date object]`
  */
 class TaskDate {
-  /** @type {(str: string) => Date} */
-  static #parse(str) {
-    const [year, month, day] = str
+  /** @type {(datetime: string) => Date} */
+  static parse(datetime) {
+    const [date, time] = datetime.split('_');
+    const base = new Date();
+
+    const [year, month, day] = date
       .split('-')
       .map((part) => Number.parseInt(part));
-    return new Date(year, month - 1, day);
+    base.setFullYear(year, month - 1, day);
+
+    if (time) {
+      const [hours, minutes, seconds] = time
+        .split(':')
+        .map((part) => Number.parseInt(part));
+      base.setHours(hours, minutes, seconds);
+    }
+
+    return base;
   }
-  /** @type {(date: Date) => string} */
-  static #format(date) {
-    const year = date.getFullYear();
-    const month = date.getMonth() + 1;
-    const day = date.getDate();
-    return `${year}-${month}-${day}`;
+  /** @type {(obj: Date, as: {date: boolean, time: boolean}) => string} */
+  static format(obj, { asDate = false, asTime = false } = {}) {
+    const year = obj.getFullYear();
+    const month = obj.getMonth() + 1;
+    const day = obj.getDate();
+    const date = `${year}-${month}-${day}`;
+    if (asDate) return date;
+
+    const hours = obj.getHours();
+    const minutes = obj.getMinutes();
+    const seconds = obj.getSeconds();
+    const time = `${hours}:${minutes}:${seconds}`;
+    if (asTime) return time;
+
+    return `${date}_${time}`;
   }
 
-  date;
+  obj;
   constructor(dateStr = null) {
-    this.date = dateStr ? TaskDate.#parse(dateStr) : new Date();
+    this.obj = dateStr ? TaskDate.parse(dateStr) : new Date();
   }
   static get current() {
-    return new this();
+    return new TaskDate();
   }
-  toString() {
-    /* For supporting implicit casts to strings, e.g. `JSON.stringify()` */
-    return TaskDate.#format(this.date);
+  toJSON() {
+    /* For supporting `JSON.stringify()` */
+    return this.datetime;
+  }
+  get datetime() {
+    return TaskDate.format(this.obj);
+  }
+  get date() {
+    return TaskDate.format(this.obj, { asDate: true });
+  }
+  get time() {
+    return TaskDate.format(this.obj, { asTime: true });
   }
 }
 
