@@ -3,7 +3,7 @@ import { TaskDate } from 'src/model/task-dates.js';
 import { FormLabel, FormInput, FormButtonGroup } from './Forms.js';
 import { ListToggleData } from './ListToggles.js';
 import { E } from '../__dom__.js';
-import { Events } from '../../controller/pubsub.js';
+import { Events } from 'src/controller/pubsub.js';
 
 const ModalContentHeader = (title) => {
   const heading = E('h1', { class: 'fw-semibold' }, title);

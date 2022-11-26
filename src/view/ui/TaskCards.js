@@ -1,7 +1,7 @@
 import { ModelIDs } from 'src/model/ids.js';
 import PriorityColors from './priority-colors.js';
 import { E } from '../__dom__.js';
-import { Events } from '../../controller/pubsub.js';
+import { Events } from 'src/controller/pubsub.js';
 
 const TaskCardDelete = (id) => {
   const element = E('button', {
