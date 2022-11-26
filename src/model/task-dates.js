@@ -1,3 +1,8 @@
+/** @type {(num: number) => string} */
+function leftPad0(num) {
+  return num.toString().padStart(2, '0');
+}
+
 /**
  * `YYYY-MM-DD_HH:MM:SS` ⇄ `[Date object]`
  */
@@ -22,15 +27,15 @@ class TaskDate {
   }
   /** @type {(obj: Date, as: {date: boolean, time: boolean}) => string} */
   static format(obj, { asDate = false, asTime = false } = {}) {
-    const year = obj.getFullYear();
-    const month = obj.getMonth() + 1;
-    const day = obj.getDate();
+    const year = leftPad0(obj.getFullYear());
+    const month = leftPad0(obj.getMonth() + 1);
+    const day = leftPad0(obj.getDate());
     const date = `${year}-${month}-${day}`;
     if (asDate) return date;
 
-    const hours = obj.getHours();
-    const minutes = obj.getMinutes();
-    const seconds = obj.getSeconds();
+    const hours = leftPad0(obj.getHours());
+    const minutes = leftPad0(obj.getMinutes());
+    const seconds = leftPad0(obj.getSeconds());
     const time = `${hours}:${minutes}:${seconds}`;
     if (asTime) return time;
 
