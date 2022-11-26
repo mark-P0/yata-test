@@ -1,5 +1,4 @@
-import ModelIDs from './model-ids.js';
-import { extractPrefix } from './id-generator.js';
+import { InstanceIDs, ModelIDs } from './ids.js';
 import { Task } from './tasks.js';
 import { Events } from '../controller/pubsub.js';
 
@@ -40,7 +39,7 @@ Events.READ_STORAGE_ENTRY.subscribe((entry) => {
   const { key, value } = entry;
 
   const task = Task.deserialize(key, value);
-  const type = extractPrefix(key);
+  const type = InstanceIDs.extractPrefix(key);
   TaskLists[type].add(task);
 });
 

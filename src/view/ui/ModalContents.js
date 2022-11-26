@@ -1,8 +1,8 @@
+import { ModelIDs } from 'src/model/ids.js';
+import { TaskDate } from 'src/model/task-dates.js';
 import { FormInput, FormLabel, FormLabelRequiredHint } from './Forms.js';
 import { ListToggleData } from './ListToggles.js';
 import { E } from '../__dom__.js';
-import ModelIDs from 'src/model/model-ids.js';
-import { TaskDate } from 'src/model/task-dates.js';
 import { Events } from '../../controller/pubsub.js';
 
 const ModalContentHeader = (title) => {

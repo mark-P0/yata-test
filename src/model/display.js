@@ -1,5 +1,5 @@
-import ModelIDs from './model-ids.js';
-import Sorters, { SorterIDs } from './sorters.js';
+import { ModelIDs, SorterIDs } from './ids.js';
+import Sorters from './sorters.js';
 import { Task } from './tasks.js';
 import { Events } from '../controller/pubsub.js';
 

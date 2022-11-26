@@ -1,7 +1,7 @@
+import Utilities from '../../scripts/utilities.js';
+import { ModelIDs } from 'src/model/ids.js';
 import { E } from '../__dom__.js';
 import { Events } from '../../controller/pubsub.js';
-import Utilities from '../../scripts/utilities.js';
-import ModelIDs from 'src/model/model-ids.js';
 
 const TodoCardDelete = (id) => {
   const element = E('button', {

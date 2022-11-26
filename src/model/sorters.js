@@ -1,11 +1,5 @@
+import { SorterIDs } from './ids.js';
 import { Task } from './tasks.js';
-
-const SorterIDs = {
-  CREATION_DATE: 'SortByCreation',
-  PRIORITY: 'SortByPriority',
-  PROJECT: 'SortByProject',
-  DUE_DATE: 'SortByDueDate',
-};
 
 /** @type {{[key: string]: (displayItems: Task[]) => void}} */
 const Sorters = {
@@ -31,4 +25,3 @@ const Sorters = {
 };
 
 export default Sorters;
-export { SorterIDs };

@@ -1,5 +1,5 @@
 import { TaskDate } from './task-dates.js';
-import { generateId } from './id-generator.js';
+import { InstanceIDs } from './ids.js';
 
 class Task {
   static #toConstructInternally = false;
@@ -13,7 +13,7 @@ class Task {
   constructor(type, title, description, dueDate, priority) {
     if (Task.#toConstructInternally) return this;
 
-    this.id = generateId(type);
+    this.id = InstanceIDs.generate(type);
     this.creationDate = TaskDate.current;
     this.title = title;
     this.description = description;
