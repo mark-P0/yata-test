@@ -1,5 +1,5 @@
-import Utilities from '../../scripts/utilities.js';
 import { ModelIDs } from 'src/model/ids.js';
+import PriorityColors from './priority-colors.js';
 import { E } from '../__dom__.js';
 import { Events } from '../../controller/pubsub.js';
 
@@ -42,14 +42,14 @@ const TaskCardFooter = (dueDate) => {
 const TaskCard = (todo) => {
   const { id, title, description, dueDate, priority } = todo;
 
-  const card = E('section', { class: 'card shadow text-dark' }, [
+  const attributes = {
+    class: 'priority card shadow text-dark',
+    style: `--hue: ${PriorityColors[priority]};`,
+  };
+  const card = E('section', attributes, [
     TaskCardBody(id, title, description),
     TaskCardFooter(dueDate),
   ]);
-
-  const priorityRev = Utilities.reverse(priority, [0, 6]);
-  const hue = Utilities.translate(priorityRev, [0, 6], [0, 240]);
-  card.style.setProperty('--hint-hue', hue);
 
   return card;
 };

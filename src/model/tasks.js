@@ -1,5 +1,6 @@
-import { TaskDate } from './task-dates.js';
 import { InstanceIDs } from './ids.js';
+import { TaskDate } from './task-dates.js';
+import { Priority } from './priorities.js';
 
 class Task {
   static #toConstructInternally = false;
@@ -18,7 +19,7 @@ class Task {
     this.title = title;
     this.description = description;
     this.dueDate = new TaskDate(dueDate);
-    this.priority = Number.parseInt(priority) || 0;
+    this.priority = new Priority(priority);
   }
 
   /** @type {(instance: Task, asDatetime: boolean) => {}} */
@@ -27,6 +28,7 @@ class Task {
 
     creationDate = asDatetime ? creationDate.datetime : creationDate.date;
     dueDate = asDatetime ? dueDate.datetime : dueDate.date;
+    priority = priority.id;
 
     return { id, creationDate, title, description, dueDate, priority };
   }
@@ -46,7 +48,7 @@ class Task {
     instance.id = id;
     instance.creationDate = new TaskDate(object.creationDate);
     instance.dueDate = new TaskDate(object.dueDate);
-    instance.priority = Number.parseInt(object.priority);
+    instance.priority = new Priority(object.priority);
     this.#toConstructInternally = false;
 
     return instance;

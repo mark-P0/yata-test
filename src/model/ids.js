@@ -24,4 +24,12 @@ const SorterIDs = {
   DUE_DATE: 'SortByDueDate',
 };
 
-export { InstanceIDs, ModelIDs, SorterIDs };
+const PriorityIDs = {
+  NONE: 'NonPriority',
+  LOW: 'LowPriority',
+  MID: 'MediumPriority',
+  HIGH: 'HighPriority',
+  URGENT: 'CriticalPriority',
+};
+
+export { InstanceIDs, ModelIDs, SorterIDs, PriorityIDs };
