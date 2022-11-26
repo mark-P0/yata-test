@@ -3,6 +3,12 @@
   justify-content: center;
   align-items: center;
 }
+.flex-maximize {
+  display: flex;
+}
+.flex-maximize > * {
+  flex: 1;
+}
 .fs-smaller {
   font-size: smaller;
 }

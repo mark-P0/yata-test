@@ -35,6 +35,19 @@ const NewTodoModalContentForm = (() => {
   const title = 'Create a New Todo';
   const currentDate = TaskDate.current.date;
 
+  const buttons = E('div', { class: 'hstack flex-maximize gap-3 mt-3' }, [
+    E('button', 'Reset', {
+      type: 'reset',
+      class: 'btn btn-outline-danger',
+      'aria-label': 'Reset form',
+    }),
+    E('button', 'Create', {
+      type: 'submit',
+      class: 'btn btn-dark',
+      'aria-label': title,
+    }),
+  ]);
+
   /* prettier-ignore */
   const form = E('form', { method: 'dialog', class: 'vstack' }, [
     FormLabel('Title', [
@@ -50,11 +63,7 @@ const NewTodoModalContentForm = (() => {
     FormLabel('Priority', [
       FormInput('priority', { type: 'number', value: '0', min: '0', max: '6' }),
     ]),
-    E('button', 'Create', {
-      type: 'submit',
-      class: 'btn btn-dark mt-3',
-      'aria-label': title,
-    }),
+    buttons,
   ]);
 
   const defaultFocusElement = form.querySelector('[autofocus]');
