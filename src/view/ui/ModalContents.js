@@ -35,6 +35,8 @@ const NewTodoModalContentForm = (() => {
   const title = 'Create a New Todo';
   const currentDate = TaskDate.current.date;
 
+  /* prettier-ignore */
+  const defaultFocusInput = FormInput('title', { type: 'text', required: true, autofocus: true })
   const buttons = E('div', { class: 'hstack flex-maximize gap-3 mt-3' }, [
     E('button', 'Reset', {
       type: 'reset',
@@ -47,16 +49,9 @@ const NewTodoModalContentForm = (() => {
       'aria-label': title,
     }),
   ]);
-
-  /* prettier-ignore */
   const form = E('form', { method: 'dialog', class: 'vstack' }, [
-    FormLabel('Title', [
-      FormLabelRequiredHint,
-      FormInput('title', { type: 'text', required: true, autofocus: true }),
-    ]),
-    FormLabel('Description', [
-      FormInput('description', { type: 'text' }),
-    ]),
+    FormLabel('Title', [FormLabelRequiredHint, defaultFocusInput]),
+    FormLabel('Description', [FormInput('description', { type: 'text' })]),
     FormLabel('Due Date', [
       FormInput('dueDate', { type: 'date', value: currentDate }),
     ]),
@@ -66,17 +61,14 @@ const NewTodoModalContentForm = (() => {
     buttons,
   ]);
 
-  const defaultFocusElement = form.querySelector('[autofocus]');
-  if (defaultFocusElement) {
-    /*  The `autofocus` attribute, if present, will not actually do anything meaningful.
-     *  It auto-focuses to the attribute "on page load". The intention here is to focus on the input
-     *  "when the modal is shown". This "technique" is also outlined on Bootstrap's docs.
-     *  https://getbootstrap.com/docs/5.2/components/modal/#how-it-works
-     */
-    document.addEventListener('shown.bs.modal', () => {
-      defaultFocusElement.focus();
-    });
-  }
+  /*  Auto-focus to the corresponding input element.
+   *  The `autofocus` attribute, if present, will not actually do anything meaningful.
+   *  It auto-focuses to the attribute "on page load".
+   *  The intention here is to focus on the input "when the modal is shown".
+   *  This "technique" is also outlined on Bootstrap's docs.
+   *  https://getbootstrap.com/docs/5.2/components/modal/#how-it-works
+   */
+  document.addEventListener('shown.bs.modal', () => defaultFocusInput.focus());
 
   const toggleId = ListToggleData.TODO_LIST.id;
   const modalContent = ModalContent(toggleId, title, [form]);
