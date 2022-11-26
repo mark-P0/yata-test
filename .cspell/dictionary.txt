@@ -1,8 +1,0 @@
-yata
-todos
-fullscreen
-flaticon
-favicons
-homescreen
-kanban
-datetime

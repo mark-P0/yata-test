@@ -1,11 +1,12 @@
 {
-  "dictionaries": ["project-dictionary"],
-
-  "dictionaryDefinitions": [
-    {
-      "name": "project-dictionary",
-      "path": "./.cspell/dictionary.txt",
-      "addWords": true
-    }
+  "words": [
+    "datetime",
+    "kanban",
+    "homescreen",
+    "favicons",
+    "flaticon",
+    "fullscreen",
+    "todos",
+    "yata"
   ]
 }
