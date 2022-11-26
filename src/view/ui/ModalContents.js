@@ -71,19 +71,18 @@ const NewTodoModalContentForm = (() => {
 
   const toggleId = ListToggleData.TODO_LIST.id;
   const modalContent = ModalContent(toggleId, title, [form]);
-  const closerElement = modalContent.querySelector('.btn-close');
-  const formElement = modalContent.querySelector('form');
 
-  formElement.addEventListener('submit', () => {
-    const formData = new FormData(formElement);
+  const closer = modalContent.querySelector('.btn-close');
+  form.addEventListener('submit', () => {
+    const formData = new FormData(form);
     const todoProps = Object.fromEntries(formData);
 
     Events.CREATE_TASK.publish({
       type: ModelIDs.TODO,
       data: todoProps,
     });
-    closerElement.click();
-    formElement.reset();
+    closer.click();
+    form.reset();
   });
 
   return modalContent;
