@@ -1,15 +1,20 @@
 import { E } from '../__dom__.js';
 
-const FormLabelRequiredHint = E('span', { class: 'text-danger fw-bold' }, '*');
-const FormLabel = (label, nestedElements) => {
-  const children = [E('#text', label)];
-  children.push(...nestedElements);
+const FormLabelRequiredHint = () =>
+  E('span', { class: 'text-danger fw-bold' }, '*');
+const FormLabel = (label, nestedElements, isRequired = false) => {
+  let children;
 
-  return E('label', { class: 'form-label' }, children);
+  children = [];
+  if (isRequired) children.push(FormLabelRequiredHint());
+  const text = E('span', label, children);
+
+  children = [text, ...nestedElements];
+  return E('label', { class: 'form-label vstack gap-1' }, children);
 };
 
 const FormInput = (name, attributes) => {
   return E('input', { class: 'form-control', name, ...attributes });
 };
 
-export { FormLabelRequiredHint, FormLabel, FormInput };
+export { FormLabel, FormInput };

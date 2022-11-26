@@ -1,6 +1,6 @@
 import { ModelIDs } from 'src/model/ids.js';
 import { TaskDate } from 'src/model/task-dates.js';
-import { FormInput, FormLabel, FormLabelRequiredHint } from './Forms.js';
+import { FormLabel, FormInput } from './Forms.js';
 import { ListToggleData } from './ListToggles.js';
 import { E } from '../__dom__.js';
 import { Events } from '../../controller/pubsub.js';
@@ -34,10 +34,9 @@ const ModalContent = (toggleId, title, elements) => {
 const NewTodoModalContentForm = (() => {
   const title = 'Create a New Todo';
   const currentDate = TaskDate.current.date;
-
   /* prettier-ignore */
   const defaultFocusInput = FormInput('title', { type: 'text', required: true, autofocus: true })
-  const buttons = E('div', { class: 'hstack flex-maximize gap-3 mt-3' }, [
+  const buttons = E('div', { class: 'hstack flex-maximize gap-3 mt-2' }, [
     E('button', 'Reset', {
       type: 'reset',
       class: 'btn btn-outline-danger',
@@ -49,8 +48,8 @@ const NewTodoModalContentForm = (() => {
       'aria-label': title,
     }),
   ]);
-  const form = E('form', { method: 'dialog', class: 'vstack' }, [
-    FormLabel('Title', [FormLabelRequiredHint, defaultFocusInput]),
+  const form = E('form', { method: 'dialog', class: 'vstack gap-2' }, [
+    FormLabel('Title', [defaultFocusInput], true),
     FormLabel('Description', [FormInput('description', { type: 'text' })]),
     FormLabel('Due Date', [
       FormInput('dueDate', { type: 'date', value: currentDate }),
