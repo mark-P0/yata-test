@@ -1,4 +1,4 @@
-import { InstanceIDs } from './ids.js';
+import { InstanceIDs, TaskParameterIDs } from './ids.js';
 import { TaskDate } from './task-dates.js';
 import { Priority } from './priorities.js';
 
@@ -11,15 +11,15 @@ class Task {
   description;
   dueDate;
   priority;
-  constructor(type, title, description, dueDate, priority) {
+  constructor(type, args) {
     if (Task.#toConstructInternally) return this;
 
     this.id = InstanceIDs.generate(type);
     this.creationDate = TaskDate.current;
-    this.title = title;
-    this.description = description;
-    this.dueDate = new TaskDate(dueDate);
-    this.priority = new Priority(priority);
+    this.title = args[TaskParameterIDs.TITLE];
+    this.description = args[TaskParameterIDs.DESCRIPTION];
+    this.dueDate = new TaskDate(args[TaskParameterIDs.DUE_DATE]);
+    this.priority = new Priority(args[TaskParameterIDs.PRIORITY]);
   }
 
   /** @type {(instance: Task, asDatetime: boolean) => {}} */

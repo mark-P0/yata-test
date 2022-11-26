@@ -14,7 +14,7 @@ const InstanceIDs = {
 };
 
 const ModelIDs = {
-  TODO: 'Todo',
+  TODO: 'TodoTask',
 };
 
 const SorterIDs = {
@@ -32,4 +32,11 @@ const PriorityIDs = {
   URGENT: 'CriticalPriority',
 };
 
-export { InstanceIDs, ModelIDs, SorterIDs, PriorityIDs };
+const TaskParameterIDs = {
+  TITLE: 'TaskTitle',
+  DESCRIPTION: 'TaskDescription',
+  DUE_DATE: 'TaskDueDate',
+  PRIORITY: 'TaskPriority',
+};
+
+export { InstanceIDs, ModelIDs, SorterIDs, PriorityIDs, TaskParameterIDs };

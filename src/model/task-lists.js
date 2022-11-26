@@ -44,8 +44,7 @@ Events.READ_STORAGE_ENTRY.subscribe((entry) => {
 });
 
 Events.CREATE_TASK.subscribe(({ type, data }) => {
-  const args = Object.values(data);
-  const task = new Task(type, ...args);
+  const task = new Task(type, data);
   TaskLists[type].add(task);
 
   const [key, value] = Task.serialize(task);

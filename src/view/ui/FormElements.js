@@ -2,17 +2,18 @@ import { InstanceIDs } from 'src/model/ids.js';
 import PriorityColors from './priority-colors.js';
 import { E } from '../__dom__.js';
 
-const FormLabelRequiredHint = () =>
-  E('span', { class: 'text-danger fw-bold' }, '*');
-const FormLabel = (label, nestedElements, isRequired = false) => {
+const FormLabelRequiredHint = (char = '*') => {
+  return E('span', { class: 'text-danger fw-bold' }, char);
+};
+
+const FormLabel = (label, control) => {
+  if (label === null) return control;
   let children;
 
-  children = [];
-  if (isRequired) children.push(FormLabelRequiredHint());
+  children = control.getAttribute('required') ? [FormLabelRequiredHint()] : [];
   const text = E('span', label, children);
 
-  children = [text, ...nestedElements];
-  return E('label', { class: 'form-label vstack gap-1' }, children);
+  return E('label', { class: 'form-label vstack gap-1' }, [text, control]);
 };
 
 const FormInput = (name, attributes) => {
