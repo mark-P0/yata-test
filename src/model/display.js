@@ -36,6 +36,7 @@ const Display = (() => {
     },
     set sorter(newSorter) {
       if (sorter === newSorter) asDescending = !asDescending;
+      else asDescending = false;
       sorter = newSorter;
       emit();
     },
