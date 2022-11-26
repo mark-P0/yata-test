@@ -12,6 +12,11 @@ Events.INITIALIZATION.subscribe(() => {
   }
 });
 
+Events.UPDATE_STORAGE_ENTRY.subscribe((entry) => {
+  const { key, value } = entry;
+  localStorage.setItem(key, value);
+});
+
 Events.DELETE_STORAGE_ENTRY.subscribe((key) => {
   localStorage.removeItem(key);
 });

@@ -6,21 +6,26 @@ import { ModalContent } from './ModalContents.js';
 import { E } from '../__dom__.js';
 import { Events } from 'src/controller/pubsub.js';
 
-const TodoModalContentForm = () => {
-  const title = 'Create a New Todo';
-  const currentDate = TaskDate.current.date;
+const TodoModalContentForm = (title, buttonSubmitText, values) => {
+  values ??= {
+    id: null,
+    [TaskParameterIDs.TITLE]: '',
+    [TaskParameterIDs.DESCRIPTION]: '',
+    [TaskParameterIDs.DUE_DATE]: TaskDate.current.date,
+    [TaskParameterIDs.PRIORITY]: PriorityIDs.NONE,
+  };
 
   /* prettier-ignore */
   const controls = [
     {
       label: 'Title',
-      input: FormInput(TaskParameterIDs.TITLE, { type: 'text', required: true, autofocus: true }),
+      input: FormInput(TaskParameterIDs.TITLE, { type: 'text', value: values[TaskParameterIDs.TITLE], required: true, autofocus: true }),
     }, {
       label: 'Description',
-      input: FormInput(TaskParameterIDs.DESCRIPTION, { type: 'text' }),
+      input: FormInput(TaskParameterIDs.DESCRIPTION, { type: 'text', value: values[TaskParameterIDs.DESCRIPTION] }),
     }, {
       label: 'Due Date',
-      input: FormInput(TaskParameterIDs.DUE_DATE, { type: 'date', value: currentDate }),
+      input: FormInput(TaskParameterIDs.DUE_DATE, { type: 'date', value: values[TaskParameterIDs.DUE_DATE] }),
     }, {
       label: 'Priority',
       input: FormButtonGroup(TaskParameterIDs.PRIORITY, 'radio', [
@@ -29,12 +34,12 @@ const TodoModalContentForm = () => {
         { value: PriorityIDs.MID, text: 'Mid' },
         { value: PriorityIDs.HIGH, text: 'High' },
         { value: PriorityIDs.URGENT, text: 'Urgent' },
-      ]),
+      ], values[TaskParameterIDs.PRIORITY]),
     }, {
       label: null,
       input: E('div', { class: 'hstack flex-maximize gap-3 mt-2' }, [
         E('button', 'Reset', { type: 'reset', class: 'btn btn-outline-danger', 'aria-label': 'Reset form' }),
-        E('button', 'Create', { type: 'submit', class: 'btn btn-dark', 'aria-label': title }),
+        E('button', buttonSubmitText, { type: 'submit', class: 'btn btn-dark', 'aria-label': title }),
       ])
     }
   ];
@@ -60,7 +65,13 @@ const TodoModalContentForm = () => {
     const formData = new FormData(form);
     const todoProps = Object.fromEntries(formData);
 
-    Events.CREATE_TASK.publish({ type: ModelIDs.TODO, data: todoProps });
+    const { id } = values;
+    if (!id) {
+      Events.CREATE_TASK.publish({ type: ModelIDs.TODO, data: todoProps });
+    } else {
+      Events.UPDATE_TASK.publish({ type: ModelIDs.TODO, data: todoProps, id });
+    }
+
     closer.click();
     form.reset();
   });

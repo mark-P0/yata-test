@@ -20,13 +20,13 @@ const FormInput = (name, attributes) => {
   return E('input', { class: 'form-control', name, ...attributes });
 };
 
-const FormButtonGroup = (name, type, labels, defaultIdx = 0) => {
+const FormButtonGroup = (name, type, labels, defaultId) => {
   let attributes, children;
 
   children = labels.flatMap(({ value, text }, idx) => {
     const id = InstanceIDs.generate('HTML');
     attributes = { type, class: 'btn-check', name, id, value };
-    if (idx === defaultIdx) attributes.checked = true;
+    if (defaultId === value) attributes.checked = true;
     const input = E('input', attributes);
 
     const hue = PriorityColors[value];

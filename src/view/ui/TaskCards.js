@@ -1,32 +1,59 @@
-import { ModelIDs } from 'src/model/ids.js';
+import { TaskParameterIDs } from 'src/model/ids.js';
 import PriorityColors from './priority-colors.js';
 import { E } from '../__dom__.js';
 import { Events } from 'src/controller/pubsub.js';
 
-const TaskCardDelete = (id) => {
-  const element = E('button', {
+const IconButton = (icon, label, attributes = {}) => {
+  return E('button', {
     type: 'button',
-    'aria-label': 'Delete todo',
-    class: 'btn-close',
+    'aria-label': label,
+    class: `bi-${icon} btn px-1 py-0`,
+    ...attributes,
   });
+};
 
-  const listener = () => {
-    Events.DELETE_TASK.publish({
-      type: ModelIDs.TODO,
+const TaskCardEdit = (task) => {
+  const element = IconButton('pen', 'Edit', {
+    'data-bs-toggle': 'modal',
+    'data-bs-target': '#modal',
+  });
+  element.addEventListener('click', () => {
+    const { id, title, description, dueDate, priority } = task;
+    const values = {
       id,
-    });
-  };
-  element.addEventListener('click', listener, { once: true });
-
+      [TaskParameterIDs.TITLE]: title,
+      [TaskParameterIDs.DESCRIPTION]: description,
+      [TaskParameterIDs.DUE_DATE]: dueDate,
+      [TaskParameterIDs.PRIORITY]: priority,
+    };
+    Events.UPDATE_TODO_FORM.publish(values);
+  });
   return element;
 };
 
-const TaskCardBody = (id, title, description) => {
-  const heading = E(
-    'div',
-    { class: 'hstack justify-content-between align-items-start' },
-    [E('h5', { class: 'card-title fw-semibold' }, title), TaskCardDelete(id)]
-  );
+const TaskCardDelete = (id) => {
+  const element = IconButton('trash3', 'Delete');
+  const listener = () => {
+    Events.DELETE_TASK.publish(id);
+  };
+  element.addEventListener('click', listener, { once: true });
+  return element;
+};
+
+const TaskCardBody = (id, title, description, task) => {
+  let attributes, children;
+
+  attributes = {
+    class: 'hstack justify-content-between gap-3 align-items-start',
+  };
+  children = [
+    E('h5', { class: 'card-title fw-semibold' }, title),
+    E('div', { class: 'hstack gap-2 align-items-start' }, [
+      TaskCardEdit(task),
+      TaskCardDelete(id),
+    ]),
+  ];
+  const heading = E('div', attributes, children);
 
   const text = E('p', { class: 'card-text' }, description);
   return E('div', { class: 'card-body' }, [heading, text]);
@@ -39,15 +66,15 @@ const TaskCardFooter = (dueDate) => {
   return E('div', attributes, [E('#text', 'Due on '), E('strong', dueDate)]);
 };
 
-const TaskCard = (todo) => {
-  const { id, title, description, dueDate, priority } = todo;
+const TaskCard = (task) => {
+  const { id, title, description, dueDate, priority } = task;
 
   const attributes = {
     class: 'priority card shadow text-dark',
     style: `--hue: ${PriorityColors[priority]};`,
   };
   const card = E('section', attributes, [
-    TaskCardBody(id, title, description),
+    TaskCardBody(id, title, description, task),
     TaskCardFooter(dueDate),
   ]);
 

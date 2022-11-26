@@ -6,7 +6,7 @@ const ListView = () => {
   const element = E('div', { class: 'd-grid gap-3' });
 
   Events.EMIT_DISPLAY.subscribe((displayList) => {
-    const cards = displayList.map((todo) => TaskCard(todo));
+    const cards = displayList.map((task) => TaskCard(task));
     element.replaceChildren(...cards);
   });
 

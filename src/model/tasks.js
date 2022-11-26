@@ -16,6 +16,10 @@ class Task {
 
     this.id = InstanceIDs.generate(type);
     this.creationDate = TaskDate.current;
+    this.update(args);
+  }
+
+  update(args) {
     this.title = args[TaskParameterIDs.TITLE];
     this.description = args[TaskParameterIDs.DESCRIPTION];
     this.dueDate = new TaskDate(args[TaskParameterIDs.DUE_DATE]);
