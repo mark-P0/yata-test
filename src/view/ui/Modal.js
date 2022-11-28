@@ -8,7 +8,6 @@ const mapTaskTypeTexts = {
   [ModelIDs.TODO]: 'Todo',
   [ModelIDs.PROJECT]: 'Project',
 };
-/** @type {typeof ModalFormTypes[keyof typeof ModalFormTypes]} */
 const CurrentTask = {
   type: ModelIDs.TODO,
   get typeText() {
@@ -16,9 +15,6 @@ const CurrentTask = {
   },
   id: undefined,
 };
-Events.UPDATE_DISPLAY_TYPE.subscribe((type) => {
-  CurrentTask.type = type;
-});
 const ModalFormTypes = /** @type {const} */ ({
   CREATE: 'CreatingModalForm',
   UPDATE: 'UpdatingModalForm',
@@ -28,15 +24,11 @@ const mapFormTypeData = {
   [ModalFormTypes.CREATE]: { title: () => `Create a New ${CurrentTask.typeText}`, button: 'Create', event: Events.CREATE_TASK },
   [ModalFormTypes.UPDATE]: { title: () => `Edit a ${CurrentTask.typeText}`,       button: 'Update', event: Events.UPDATE_TASK },
 };
+/** @type {typeof ModalFormTypes[keyof typeof ModalFormTypes]} */
 let ModalFormType;
 
 const ModalTitle = E('h1', { class: 'fw-semibold' }, /* Text set dynamically */ ); // prettier-ignore
-const ModalCloser = E('button', {
-  type: 'button',
-  class: 'btn-close',
-  'aria-label': 'Close modal',
-  'data-bs-dismiss': 'modal',
-});
+const ModalCloser = E('button', { type: 'button', class: 'btn-close', 'aria-label': 'Close modal', 'data-bs-dismiss': 'modal' }); // prettier-ignore
 
 const ModalFormRadioButton = (name, value, text) => {
   let attributes;
@@ -93,9 +85,36 @@ const mapTaskParamControls = {
     const input = E('div', { class: 'btn-group mb-2', id }, Object.values(mapPriorityRadioButtons).flatMap(Object.values));
     return { label, input };
   })(),
+  [TaskParameterIDs.PARENT]: (() => {
+    const id = InstanceIDs.generate('HTML');
+    const label = E('label', { class: 'form-label mb-1', for: id }, 'Project');
+
+    const defaultOption = E('option', { value: '' }, 'No project association');
+    const input = E('select', { class: 'form-select mb-2', id, name: TaskParameterIDs.PARENT }, [defaultOption]);
+
+    Events.UPDATE_DISPLAY_ITEMS.subscribe(({ type, data }) => {
+      if (type !== ModelIDs.PROJECT) return;
+      input.replaceChildren(
+        defaultOption,
+        ...data.map(({id, title}) => E('option', { value: id }, title)),
+      );
+    });
+
+    return { label, input };
+  })(),
 };
 function setDefaultControlValue(taskParamId, value) {
-  mapTaskParamControls[taskParamId].input.setAttribute('value', value);
+  const { input } = mapTaskParamControls[taskParamId];
+  input.setAttribute('value', value);
+}
+function setDefaultSelectionValue(parentId) {
+  const { input } = mapTaskParamControls[TaskParameterIDs.PARENT];
+  for (const option of input.children) {
+    option.removeAttribute('selected');
+    if (option.getAttribute('value') === parentId) {
+      option.setAttribute('selected', true);
+    }
+  }
 }
 
 const ModalFormResetButton = E('button', { type: 'reset', class: 'btn btn-outline-danger', 'aria-label': 'Reset form' }, 'Reset'); // prettier-ignore
@@ -134,25 +153,48 @@ Modal.addEventListener('shown.bs.modal', () => {
   mapTaskParamControls[TaskParameterIDs.TITLE].input.focus();
 });
 
+Events.UPDATE_DISPLAY_TYPE.subscribe((type) => {
+  if (CurrentTask.type !== type) {
+    ModalForm.reset();
+  }
+  CurrentTask.type = type;
+});
+
 Events.UPDATE_MODAL.subscribe((data) => {
   ModalFormType = data.formType;
   ModalTitle.textContent = mapFormTypeData[ModalFormType].title();
   ModalFormSubmitButton.textContent = mapFormTypeData[ModalFormType].button;
 
-  /* prettier-ignore */
-  if (ModalFormType === ModalFormTypes.CREATE) {
-    CurrentTask.id = undefined;
-    setDefaultControlValue(TaskParameterIDs.TITLE,        '');
-    setDefaultControlValue(TaskParameterIDs.DESCRIPTION,  '');
-    setDefaultControlValue(TaskParameterIDs.DUE_DATE,     TaskDate.current.date);
-    setDefaultRadioButton(PriorityIDs.NONE);
+  {
+    /* Hide selection input based on current task type */
+    const { label, input } = mapTaskParamControls[TaskParameterIDs.PARENT];
+    if (CurrentTask.type === ModelIDs.TODO) {
+      label.classList.remove('d-none');
+      input.classList.remove('d-none');
+    } else {
+      label.classList.add('d-none');
+      input.classList.add('d-none');
+    }
   }
-  else if (ModalFormType === ModalFormTypes.UPDATE) {
-    CurrentTask.id = data.id;
-    setDefaultControlValue(TaskParameterIDs.TITLE,        data[TaskParameterIDs.TITLE]);
-    setDefaultControlValue(TaskParameterIDs.DESCRIPTION,  data[TaskParameterIDs.DESCRIPTION]);
-    setDefaultControlValue(TaskParameterIDs.DUE_DATE,     data[TaskParameterIDs.DUE_DATE]);
-    setDefaultRadioButton(data[TaskParameterIDs.PRIORITY]);
+
+  {
+    /* Selectively modify modal elements based on modal type */
+    const { TITLE, DESCRIPTION, DUE_DATE, PRIORITY, PARENT } = TaskParameterIDs;
+    if (ModalFormType === ModalFormTypes.CREATE) {
+      CurrentTask.id = undefined;
+      setDefaultControlValue(TITLE, '');
+      setDefaultControlValue(DESCRIPTION, '');
+      setDefaultControlValue(DUE_DATE, TaskDate.current.date);
+      setDefaultRadioButton(PriorityIDs.NONE);
+      setDefaultSelectionValue('');
+    } else if (ModalFormType === ModalFormTypes.UPDATE) {
+      CurrentTask.id = data.id;
+      setDefaultControlValue(TITLE, data[TITLE]);
+      setDefaultControlValue(DESCRIPTION, data[DESCRIPTION]);
+      setDefaultControlValue(DUE_DATE, data[DUE_DATE]);
+      setDefaultRadioButton(data[PRIORITY]);
+      setDefaultSelectionValue(data[PARENT]);
+    }
   }
 });
 

@@ -38,6 +38,7 @@ const TaskParameterIDs = {
   DESCRIPTION: 'TaskDescription',
   DUE_DATE: 'TaskDueDate',
   PRIORITY: 'TaskPriority',
+  PARENT: 'TaskParent', // Parent task to which the current task belongs
 };
 
 export { InstanceIDs, ModelIDs, SorterIDs, PriorityIDs, TaskParameterIDs };

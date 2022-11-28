@@ -71,4 +71,13 @@ Events.DELETE_TASK.subscribe((id) => {
   const type = InstanceIDs.extractPrefix(id);
   TaskLists[type].remove(id);
   Events.DELETE_STORAGE_ENTRY.publish(id);
+
+  /* Also delete task's children, if any */
+  for (const list of Object.values(TaskLists)) {
+    for (const task of list.items) {
+      if (task.parent === id) {
+        Events.DELETE_TASK.publish(task.id);
+      }
+    }
+  }
 });

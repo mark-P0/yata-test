@@ -11,6 +11,7 @@ class Task {
   description;
   dueDate;
   priority;
+  parent;
   constructor(type, args) {
     if (Task.#toConstructInternally) return this;
 
@@ -24,17 +25,19 @@ class Task {
     this.description = args[TaskParameterIDs.DESCRIPTION];
     this.dueDate = new TaskDate(args[TaskParameterIDs.DUE_DATE]);
     this.priority = new Priority(args[TaskParameterIDs.PRIORITY]);
+    this.parent = args[TaskParameterIDs.PARENT];
   }
 
   /** @type {(instance: Task, asDatetime: boolean) => {}} */
   static objectify(instance, asDatetime = false) {
-    let { id, creationDate, title, description, dueDate, priority } = instance;
+    let { id, creationDate, title, description, dueDate, priority, parent } =
+      instance;
 
     creationDate = asDatetime ? creationDate.datetime : creationDate.date;
     dueDate = asDatetime ? dueDate.datetime : dueDate.date;
     priority = priority.id;
 
-    return { id, creationDate, title, description, dueDate, priority };
+    return { id, creationDate, title, description, dueDate, priority, parent };
   }
   /** @type {(instance: Task) => [string, string]} */
   static serialize(instance) {

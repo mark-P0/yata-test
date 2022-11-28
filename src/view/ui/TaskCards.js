@@ -18,7 +18,7 @@ const TaskCardEdit = (task) => {
     'data-bs-target': '#' + ModalID,
   });
   element.addEventListener('click', () => {
-    const { id, title, description, dueDate, priority } = task;
+    const { id, title, description, dueDate, priority, parent } = task;
     Events.UPDATE_MODAL.publish({
       formType: ModalFormTypes.UPDATE,
       id,
@@ -26,6 +26,7 @@ const TaskCardEdit = (task) => {
       [TaskParameterIDs.DESCRIPTION]: description,
       [TaskParameterIDs.DUE_DATE]: dueDate,
       [TaskParameterIDs.PRIORITY]: priority,
+      [TaskParameterIDs.PARENT]: parent,
     });
   });
   return element;
