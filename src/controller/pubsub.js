@@ -28,8 +28,7 @@ const Events = {
   UPDATE_DISPLAY_SORTING: new Event(),
   EMIT_DISPLAY: new Event(),
 
-  CREATE_TODO_FORM: new Event(),
-  UPDATE_TODO_FORM: new Event(),
+  UPDATE_MODAL: new Event(),
 };
 
 export { Events };

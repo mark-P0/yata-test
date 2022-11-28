@@ -1,5 +1,6 @@
 import { TaskParameterIDs } from 'src/model/ids.js';
 import PriorityColors from './priority-colors.js';
+import { ModalID, ModalFormTypes } from './Modal.js';
 import { E } from '../__dom__.js';
 import { Events } from 'src/controller/pubsub.js';
 
@@ -11,26 +12,24 @@ const IconButton = (icon, label, attributes = {}) => {
     ...attributes,
   });
 };
-
 const TaskCardEdit = (task) => {
   const element = IconButton('pen', 'Edit', {
     'data-bs-toggle': 'modal',
-    'data-bs-target': '#modal',
+    'data-bs-target': '#' + ModalID,
   });
   element.addEventListener('click', () => {
     const { id, title, description, dueDate, priority } = task;
-    const values = {
+    Events.UPDATE_MODAL.publish({
+      formType: ModalFormTypes.UPDATE,
       id,
       [TaskParameterIDs.TITLE]: title,
       [TaskParameterIDs.DESCRIPTION]: description,
       [TaskParameterIDs.DUE_DATE]: dueDate,
       [TaskParameterIDs.PRIORITY]: priority,
-    };
-    Events.UPDATE_TODO_FORM.publish(values);
+    });
   });
   return element;
 };
-
 const TaskCardDelete = (id) => {
   const element = IconButton('trash3', 'Delete');
   const listener = () => {
@@ -40,9 +39,8 @@ const TaskCardDelete = (id) => {
   return element;
 };
 
-const TaskCardBody = (id, title, description, task) => {
+const TaskCardBodyHeading = (id, title, task) => {
   let attributes, children;
-
   attributes = {
     class: 'hstack justify-content-between gap-3 align-items-start',
   };
@@ -53,10 +51,13 @@ const TaskCardBody = (id, title, description, task) => {
       TaskCardDelete(id),
     ]),
   ];
-  const heading = E('div', attributes, children);
-
-  const text = E('p', { class: 'card-text' }, description);
-  return E('div', { class: 'card-body' }, [heading, text]);
+  return E('div', attributes, children);
+};
+const TaskCardBody = (id, title, description, task) => {
+  return E('div', { class: 'card-body' }, [
+    TaskCardBodyHeading(id, title, task),
+    E('p', { class: 'card-text' }, description),
+  ]);
 };
 
 const TaskCardFooter = (dueDate) => {

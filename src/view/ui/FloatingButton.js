@@ -1,3 +1,4 @@
+import { ModalID, ModalFormTypes } from './Modal.js';
 import { E } from '../__dom__.js';
 import { Events } from 'src/controller/pubsub.js';
 
@@ -10,11 +11,13 @@ const FloatingButton = () => {
       'bi-plus-lg position-fixed translate-middle btn btn-dark rounded-circle flex-center shadow',
     'aria-label': 'Open modal',
     'data-bs-toggle': 'modal',
-    'data-bs-target': '#modal',
+    'data-bs-target': '#' + ModalID,
   };
   const button = E('button', attributes);
   button.addEventListener('click', () => {
-    Events.CREATE_TODO_FORM.publish(null);
+    Events.UPDATE_MODAL.publish({
+      formType: ModalFormTypes.CREATE,
+    });
   });
 
   attributes = {
