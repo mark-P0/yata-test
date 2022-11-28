@@ -12,18 +12,19 @@ class TaskList {
 
   add(task) {
     this.#list[task.id] = task;
-    Events.UPDATE_DISPLAY_ITEMS.publish({
-      type: this.#type,
-      data: this.items,
-    });
+    this.emit();
   }
   remove(taskId) {
     delete this.#list[taskId];
+    this.emit();
+  }
+  emit() {
     Events.UPDATE_DISPLAY_ITEMS.publish({
       type: this.#type,
       data: this.items,
     });
   }
+
   get(taskId) {
     return this.#list[taskId];
   }
@@ -34,6 +35,7 @@ class TaskList {
 
 const TaskLists = {
   [ModelIDs.TODO]: new TaskList(ModelIDs.TODO),
+  [ModelIDs.PROJECT]: new TaskList(ModelIDs.PROJECT),
 };
 
 Events.READ_STORAGE_ENTRY.subscribe((entry) => {
@@ -50,6 +52,10 @@ Events.CREATE_TASK.subscribe(({ type, data }) => {
 
   const [key, value] = Task.serialize(task);
   Events.CREATE_STORAGE_ENTRY.publish({ key, value });
+});
+
+Events.READ_TASK_LIST.subscribe((type) => {
+  TaskLists[type].emit();
 });
 
 Events.UPDATE_TASK.subscribe(({ type, data, id }) => {

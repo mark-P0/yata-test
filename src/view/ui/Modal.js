@@ -4,22 +4,31 @@ import PriorityColors from './priority-colors.js';
 import { E } from '../__dom__.js';
 import { Events } from 'src/controller/pubsub.js';
 
+const mapTaskTypeTexts = {
+  [ModelIDs.TODO]: 'Todo',
+  [ModelIDs.PROJECT]: 'Project',
+};
+/** @type {typeof ModalFormTypes[keyof typeof ModalFormTypes]} */
+const CurrentTask = {
+  type: ModelIDs.TODO,
+  get typeText() {
+    return mapTaskTypeTexts[this.type];
+  },
+  id: undefined,
+};
+Events.UPDATE_DISPLAY_TYPE.subscribe((type) => {
+  CurrentTask.type = type;
+});
 const ModalFormTypes = /** @type {const} */ ({
   CREATE: 'CreatingModalForm',
   UPDATE: 'UpdatingModalForm',
 });
-/* TODO: Set task type text dynamically? */
 /* prettier-ignore */
 const mapFormTypeData = {
-  [ModalFormTypes.CREATE]: { title: 'Create a New Todo', button: 'Create', event: Events.CREATE_TASK },
-  [ModalFormTypes.UPDATE]: { title: 'Edit a Todo', button: 'Update', event: Events.UPDATE_TASK },
+  [ModalFormTypes.CREATE]: { title: () => `Create a New ${CurrentTask.typeText}`, button: 'Create', event: Events.CREATE_TASK },
+  [ModalFormTypes.UPDATE]: { title: () => `Edit a ${CurrentTask.typeText}`,       button: 'Update', event: Events.UPDATE_TASK },
 };
-/** @type {typeof ModalFormTypes[keyof typeof ModalFormTypes]} */
 let ModalFormType;
-let CurrentTask = {
-  type: ModelIDs.TODO,
-  id: undefined,
-};
 
 const ModalTitle = E('h1', { class: 'fw-semibold' }, /* Text set dynamically */ ); // prettier-ignore
 const ModalCloser = E('button', {
@@ -127,7 +136,7 @@ Modal.addEventListener('shown.bs.modal', () => {
 
 Events.UPDATE_MODAL.subscribe((data) => {
   ModalFormType = data.formType;
-  ModalTitle.textContent = mapFormTypeData[ModalFormType].title;
+  ModalTitle.textContent = mapFormTypeData[ModalFormType].title();
   ModalFormSubmitButton.textContent = mapFormTypeData[ModalFormType].button;
 
   /* prettier-ignore */

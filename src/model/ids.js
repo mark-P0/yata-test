@@ -15,6 +15,7 @@ const InstanceIDs = {
 
 const ModelIDs = {
   TODO: 'TodoTask',
+  PROJECT: 'ProjectTask',
 };
 
 const SorterIDs = {

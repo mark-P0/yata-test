@@ -4,9 +4,9 @@ import { Task } from './tasks.js';
 import { Events } from '../controller/pubsub.js';
 
 const Display = (() => {
-  let type = ModelIDs.TODO; // Hard-code for now
+  let type = null; // Will be initialized to proper values
   let items = [];
-  let sorter = null;
+  let sorter = null; // Will be initialized to proper values
   let asDescending = false;
 
   const emit = () => {
@@ -19,6 +19,10 @@ const Display = (() => {
   return {
     get type() {
       return type;
+    },
+    set type(newType) {
+      type = newType;
+      Events.READ_TASK_LIST.publish(type);
     },
 
     get items() {
@@ -42,6 +46,10 @@ const Display = (() => {
     },
   };
 })();
+
+Events.UPDATE_DISPLAY_TYPE.subscribe((newType) => {
+  Display.type = newType;
+});
 
 Events.UPDATE_DISPLAY_ITEMS.subscribe((items) => {
   const { type, data } = items;

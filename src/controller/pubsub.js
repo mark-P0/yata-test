@@ -16,6 +16,7 @@ const Events = {
   INITIALIZATION: new Event(),
 
   CREATE_TASK: new Event(),
+  READ_TASK_LIST: new Event(),
   UPDATE_TASK: new Event(),
   DELETE_TASK: new Event(),
 
@@ -24,6 +25,7 @@ const Events = {
   UPDATE_STORAGE_ENTRY: new Event(),
   DELETE_STORAGE_ENTRY: new Event(),
 
+  UPDATE_DISPLAY_TYPE: new Event(),
   UPDATE_DISPLAY_ITEMS: new Event(),
   UPDATE_DISPLAY_SORTING: new Event(),
   EMIT_DISPLAY: new Event(),

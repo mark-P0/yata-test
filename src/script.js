@@ -3,9 +3,9 @@ import './view/styles.css';
 
 import './model/task-lists.js';
 import './model/display.js';
-import ListToggles from './view/ui/ListToggles.js';
-import Main from './view/ui/Main.js';
 import Modal from './view/ui/Modal.js';
+import Main from './view/ui/Main.js';
+import ListToggles from './view/ui/ListToggles.js';
 import './view/visibility.js';
 import './controller/local-storage.js';
 import { Events } from './controller/pubsub.js';
