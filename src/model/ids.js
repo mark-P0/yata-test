@@ -21,7 +21,6 @@ const ModelIDs = {
 const SorterIDs = {
   CREATION_DATE: 'SortByCreation',
   PRIORITY: 'SortByPriority',
-  PROJECT: 'SortByProject',
   DUE_DATE: 'SortByDueDate',
 };
 

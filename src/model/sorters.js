@@ -13,10 +13,6 @@ const Sorters = {
       (a, b) => (b.priority - a.priority) * (asDescending ? -1 : 1)
     );
   },
-  [SorterIDs.PROJECT]: (displayItems, asDescending) => {
-    console.warn('Not yet been implemented yet!');
-    displayItems;
-  },
   [SorterIDs.DUE_DATE]: (displayItems, asDescending) => {
     displayItems.sort(
       (a, b) => (a.dueDate - b.dueDate) * (asDescending ? -1 : 1)
