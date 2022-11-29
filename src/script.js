@@ -5,7 +5,7 @@ import './model/task-lists.js';
 import './model/display.js';
 import Modal from './view/ui/Modal.js';
 import Main from './view/ui/Main.js';
-import ListToggles from './view/ui/ListToggles.js';
+import Nav from './view/ui/Nav.js';
 import './view/visibility.js';
 import './controller/local-storage.js';
 import { Events } from './controller/pubsub.js';
@@ -21,4 +21,4 @@ Events.INITIALIZATION.publish(null);
 /*  Build webpage via JS
  *  Also removes the JS requirement notice
  */
-document.body.replaceChildren(ListToggles, Main, Modal);
+document.body.replaceChildren(Nav, Main, Modal);

@@ -39,6 +39,6 @@ export default {
     Plugins.FaviconsManifest,
   ],
   module: {
-    rules: [Loaders.CSS, Loaders.SASS],
+    rules: [Loaders.CSS, Loaders.SASS, Loaders.Images],
   },
 };

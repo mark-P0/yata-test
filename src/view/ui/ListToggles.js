@@ -29,13 +29,13 @@ const ListToggles = () => {
   let attributes, children;
 
   const id = InstanceIDs.generate('HTML');
-  attributes = { class: 'bg-dark text-white vstack gap-3 p-3', id };
+  attributes = { class: 'bg-dark text-white vstack gap-3', id };
   children = [
     ...ListToggle(id, ModelIDs.TODO, 'Todos', true),
     ...ListToggle(id, ModelIDs.PROJECT, 'Projects'),
   ];
 
-  return E('aside', attributes, children);
+  return E('div', attributes, children);
 };
 
 export default ListToggles();

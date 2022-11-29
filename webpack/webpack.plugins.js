@@ -76,6 +76,11 @@ const Loaders = {
     test: /\.s[ac]ss$/i,
     use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
   },
+
+  Images: {
+    test: /\.(png|svg|jpg|jpeg|gif)$/i,
+    type: 'asset/resource',
+  },
 };
 
 export { Plugins, Loaders };
