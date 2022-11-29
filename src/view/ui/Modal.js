@@ -9,7 +9,7 @@ const mapTaskTypeTexts = {
   [ModelIDs.PROJECT]: 'Project',
 };
 const CurrentTask = {
-  type: ModelIDs.TODO,
+  type: undefined,
   get typeText() {
     return mapTaskTypeTexts[this.type];
   },
