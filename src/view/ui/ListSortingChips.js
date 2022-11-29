@@ -47,7 +47,6 @@ const ListSortingChips = () => {
   const chips = E('div', attributes, [
     ...SortingChipRadio(id, SorterIDs.CREATION_DATE, 'Creation', 'pencil-square', true),
     ...SortingChipRadio(id, SorterIDs.PRIORITY, 'Priority', 'exclamation-square'),
-    // ...SortingChipRadio(id, SorterIDs.PROJECT, 'Project', 'kanban'),
     ...SortingChipRadio(id, SorterIDs.DUE_DATE, 'Due Date', 'calendar-event'),
   ]);
 
