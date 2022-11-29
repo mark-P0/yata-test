@@ -11,7 +11,7 @@ const Display = (() => {
 
   const emit = () => {
     let toEmit = items.slice();
-    Sorters[sorter](toEmit, asDescending);
+    toEmit = Sorters[sorter](toEmit, asDescending);
     toEmit = toEmit.map((task) => Task.objectify(task));
     Events.EMIT_DISPLAY.publish(toEmit);
   };
