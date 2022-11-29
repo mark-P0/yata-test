@@ -24,6 +24,10 @@ const SorterIDs = {
   DUE_DATE: 'SortByDueDate',
 };
 
+const FilterIDs = {
+  PARENT: 'FilterByParent',
+};
+
 const PriorityIDs = {
   NONE: 'NonPriority',
   LOW: 'LowPriority',
@@ -40,4 +44,11 @@ const TaskParameterIDs = {
   PARENT: 'TaskParent', // Parent task to which the current task belongs
 };
 
-export { InstanceIDs, ModelIDs, SorterIDs, PriorityIDs, TaskParameterIDs };
+export {
+  InstanceIDs,
+  ModelIDs,
+  SorterIDs,
+  FilterIDs,
+  PriorityIDs,
+  TaskParameterIDs,
+};

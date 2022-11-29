@@ -1,16 +1,21 @@
-import { ModelIDs, SorterIDs } from './ids.js';
+import { SorterIDs } from './ids.js';
 import Sorters from './sorters.js';
 import { Task } from './tasks.js';
 import { Events } from '../controller/pubsub.js';
+import Filters from './filters.js';
 
 const Display = (() => {
-  let type = null; // Will be initialized to proper values
+  /* Most will be initialized to proper values dynamically */
+  let type;
   let items = [];
-  let sorter = null; // Will be initialized to proper values
+  let sorter;
   let asDescending = false;
+  let filter;
+  let filterValue;
 
   const emit = () => {
     let toEmit = items.slice();
+    if (filter) toEmit = Filters[filter](toEmit, filterValue);
     toEmit = Sorters[sorter](toEmit, asDescending);
     toEmit = toEmit.map((task) => Task.objectify(task));
     Events.EMIT_DISPLAY.publish(toEmit);
@@ -44,6 +49,15 @@ const Display = (() => {
       sorter = newSorter;
       emit();
     },
+
+    get filter() {
+      return filter;
+    },
+    set filter({ filterId, value }) {
+      filter = filterId;
+      filterValue = value;
+      emit();
+    },
   };
 })();
 
@@ -60,4 +74,8 @@ Events.UPDATE_DISPLAY_ITEMS.subscribe((items) => {
 
 Events.UPDATE_DISPLAY_SORTING.subscribe((sorterId) => {
   Display.sorter = sorterId;
+});
+
+Events.UPDATE_DISPLAY_FILTER.subscribe(({ filterId, value }) => {
+  Display.filter = { filterId, value };
 });

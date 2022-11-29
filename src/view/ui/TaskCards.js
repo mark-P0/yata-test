@@ -1,4 +1,9 @@
-import { TaskParameterIDs } from 'src/model/ids.js';
+import {
+  FilterIDs,
+  InstanceIDs,
+  ModelIDs,
+  TaskParameterIDs,
+} from 'src/model/ids.js';
 import PriorityColors from './priority-colors.js';
 import { ModalID, ModalFormTypes } from './Modal.js';
 import { E } from '../__dom__.js';
@@ -8,7 +13,7 @@ const IconButton = (icon, label, attributes = {}) => {
   return E('button', {
     type: 'button',
     'aria-label': label,
-    class: `bi-${icon} btn px-1 py-0`,
+    class: `bi-${icon} btn px-1 py-0 z-high`,
     ...attributes,
   });
 };
@@ -46,7 +51,7 @@ const TaskCardBodyHeading = (id, title, task) => {
     class: 'hstack justify-content-between gap-3 align-items-start',
   };
   children = [
-    E('h5', { class: 'card-title fw-semibold' }, title),
+    E('h5', { class: 'card-title fw-semibold text-break' }, title),
     E('div', { class: 'hstack gap-2 align-items-start' }, [
       TaskCardEdit(task),
       TaskCardDelete(id),
@@ -70,15 +75,32 @@ const TaskCardFooter = (dueDate) => {
 
 const TaskCard = (task) => {
   const { id, title, description, dueDate, priority } = task;
+  let attributes, children;
 
-  const attributes = {
+  children = [
+    TaskCardBody(id, title, description, task),
+    TaskCardFooter(dueDate),
+  ];
+  const type = InstanceIDs.extractPrefix(id);
+  if (type === ModelIDs.PROJECT) {
+    const clicker = E('button', {
+      class: 'stretched-link btn border border-0 p-0',
+    });
+    clicker.addEventListener('click', () => {
+      Events.UPDATE_DISPLAY_FILTER.publish({
+        filterId: FilterIDs.PARENT,
+        value: id,
+      });
+      Events.UPDATE_DISPLAY_TYPE.publish(ModelIDs.TODO);
+    });
+    children.unshift(clicker);
+  }
+
+  attributes = {
     class: 'priority card shadow text-dark',
     style: `--hue: ${PriorityColors[priority]};`,
   };
-  const card = E('section', attributes, [
-    TaskCardBody(id, title, description, task),
-    TaskCardFooter(dueDate),
-  ]);
+  const card = E('section', attributes, children);
 
   return card;
 };

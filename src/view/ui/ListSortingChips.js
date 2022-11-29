@@ -50,7 +50,7 @@ const ListSortingChips = () => {
     ...SortingChipRadio(id, SorterIDs.DUE_DATE, 'Due Date', 'calendar-event'),
   ]);
 
-  attributes = { class: 'position-absolute top-0 start-0' };
+  attributes = { class: 'position-absolute top-0 start-0 z-high' };
   const container = E('div', attributes, [
     E('div', { class: 'position-fixed vw-100' }, [chips]),
   ]);

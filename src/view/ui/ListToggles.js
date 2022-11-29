@@ -10,6 +10,7 @@ const ListToggle = (group, value, text, isDefault = false) => {
   const input = E('input', attributes);
 
   input.addEventListener('click', () => {
+    Events.UPDATE_DISPLAY_FILTER.publish({ filterId: null });
     Events.UPDATE_DISPLAY_TYPE.publish(value);
   });
   if (isDefault) {

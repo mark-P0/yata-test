@@ -28,6 +28,7 @@ const Events = {
   UPDATE_DISPLAY_TYPE: new Event(),
   UPDATE_DISPLAY_ITEMS: new Event(),
   UPDATE_DISPLAY_SORTING: new Event(),
+  UPDATE_DISPLAY_FILTER: new Event(),
   EMIT_DISPLAY: new Event(),
 
   UPDATE_MODAL: new Event(),
