@@ -1,9 +1,11 @@
+import { nanoid } from 'nanoid';
+
 const separator = '_';
 const InstanceIDs = {
   /** @type {(prefix: string) => string} */
   generate(prefix) {
-    const uuid = crypto.randomUUID();
-    return `${prefix}${separator}${uuid}`;
+    const id = nanoid();
+    return `${prefix}${separator}${id}`;
   },
 
   /** @type {(id: string) => string} */
