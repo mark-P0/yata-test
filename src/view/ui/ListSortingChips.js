@@ -39,7 +39,7 @@ const ListSortingChips = () => {
   const id = InstanceIDs.generate('HTML');
   attributes = {
     class:
-      'w-100 hstack gap-3 ps-3 pe-5 pt-3 py-2 overflow-auto scrollbar scrollbar-thin scrollbar-translucent',
+      'w-100 hstack gap-3 p-3 pe-4 overflow-auto scrollbar scrollbar-thin scrollbar-translucent',
     id,
   };
   /* prettier-ignore */
