@@ -38,8 +38,11 @@ const ModalFormRadioButton = (name, value, text) => {
   const input = E('input', attributes);
 
   const hue = PriorityColors[value];
-  attributes = { class: 'priority btn', for: id, style: `--hue: ${hue};` };
-  const label = E('label', attributes, text);
+  const label = E('label', text, {
+    class: 'priority btn text-truncate',
+    for: id,
+    style: `--hue: ${hue};`,
+  });
 
   return { input, label };
 };
