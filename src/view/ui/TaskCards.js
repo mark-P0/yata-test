@@ -13,12 +13,12 @@ const IconButton = (icon, label, attributes = {}) => {
   return E('button', {
     type: 'button',
     'aria-label': label,
-    class: `bi-${icon} btn px-1 py-0 z-high`,
+    class: `${icon} btn px-1 py-0 z-high`,
     ...attributes,
   });
 };
 const TaskCardEdit = (task) => {
-  const element = IconButton('pen', 'Edit', {
+  const element = IconButton('bi-pen', 'Edit', {
     'data-bs-toggle': 'modal',
     'data-bs-target': '#' + ModalID,
   });
@@ -37,7 +37,7 @@ const TaskCardEdit = (task) => {
   return element;
 };
 const TaskCardDelete = (id) => {
-  const element = IconButton('trash3', 'Delete');
+  const element = IconButton('bi-trash3', 'Delete');
   const listener = () => {
     Events.DELETE_TASK.publish(id);
   };

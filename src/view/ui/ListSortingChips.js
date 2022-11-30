@@ -15,9 +15,8 @@ const SortingChipRadio = (group, value, text, icon, isDefault = false) => {
   };
   const background = E('div', attributes);
 
-  const bi = `bi-${icon} space-before`;
   attributes = {
-    class: `${bi} position-relative btn btn-outline-dark border-none shadow-md rounded-pill fw-semibold fs-smaller text-nowrap`,
+    class: `${icon} space-before position-relative btn btn-outline-dark border-none shadow-md rounded-pill fw-semibold fs-smaller text-nowrap`,
     for: id,
   };
   const label = E('label', attributes, text, [background]);
@@ -45,9 +44,9 @@ const ListSortingChips = () => {
   };
   /* prettier-ignore */
   const chips = E('div', attributes, [
-    ...SortingChipRadio(id, SorterIDs.CREATION_DATE, 'Creation', 'pencil-square', true),
-    ...SortingChipRadio(id, SorterIDs.PRIORITY, 'Priority', 'exclamation-square'),
-    ...SortingChipRadio(id, SorterIDs.DUE_DATE, 'Due Date', 'calendar-event'),
+    ...SortingChipRadio(id, SorterIDs.CREATION_DATE, 'Creation', 'bi-pencil-square', true),
+    ...SortingChipRadio(id, SorterIDs.PRIORITY, 'Priority', 'bi-exclamation-square'),
+    ...SortingChipRadio(id, SorterIDs.DUE_DATE, 'Due Date', 'bi-calendar-event'),
   ]);
 
   attributes = { class: 'position-absolute top-0 start-0 z-high' };
