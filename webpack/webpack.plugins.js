@@ -1,7 +1,8 @@
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import FaviconsWebpackPlugin from 'favicons-webpack-plugin';
+import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 import WorkboxPlugin from 'workbox-webpack-plugin';
+import FaviconsWebpackPlugin from 'favicons-webpack-plugin';
 
 const AppInfo = {
   name: 'YATA!',
@@ -27,6 +28,7 @@ const Plugins = {
   }),
 
   CSSGenerator: new MiniCssExtractPlugin({ filename: 'styles.css' }),
+  CSSMinimizer: new CssMinimizerPlugin(), // CSSNano
 
   /*  As detailed on Webpack's official PWA guide
    *  https://webpack.js.org/guides/progressive-web-application/

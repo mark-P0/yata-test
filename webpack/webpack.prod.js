@@ -20,6 +20,9 @@ export default {
   mode: 'production',
 
   /* Modifiers | Customizations | Additional Functionalities */
+  optimization: {
+    minimizer: ['...', Plugins.CSSMinimizer],
+  },
   plugins: [
     Plugins.HTMLGenerator,
     Plugins.CSSGenerator,
