@@ -87,6 +87,7 @@ const TaskCard = (task) => {
       class: 'stretched-link btn border border-0 p-0',
     });
     clicker.addEventListener('click', () => {
+      Events.UPDATE_LABEL_TEXT.publish(`PROJECT: ${title}`);
       Events.UPDATE_DISPLAY_FILTER.publish({
         filterId: FilterIDs.PARENT,
         value: id,

@@ -31,6 +31,7 @@ const Events = {
   UPDATE_DISPLAY_FILTER: new Event(),
   EMIT_DISPLAY: new Event(),
 
+  UPDATE_LABEL_TEXT: new Event(),
   UPDATE_MODAL: new Event(),
 };
 

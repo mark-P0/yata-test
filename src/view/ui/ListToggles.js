@@ -2,10 +2,19 @@ import { InstanceIDs, ModelIDs } from 'src/model/ids.js';
 import { E } from '../__dom__.js';
 import { Events } from 'src/controller/pubsub.js';
 
-const ListToggleLabel = E('label', {
-  class:
-    'navbar-toggler border-none text-light flex-grow-1 mx-3 text-center fw-bold fs-larger user-select-none',
-});
+const ListToggleLabel = (elementId) => {
+  const label = E('label', {
+    class:
+      'navbar-toggler border-none mx-3 flex-grow-1 text-truncate text-light text-center fw-bold fs-larger user-select-none',
+    for: elementId,
+  });
+
+  Events.UPDATE_LABEL_TEXT.subscribe((text) => {
+    label.textContent = text;
+  });
+
+  return label;
+};
 
 const ListToggle = (group, value, text, isDefault = false) => {
   let attributes;
@@ -15,7 +24,7 @@ const ListToggle = (group, value, text, isDefault = false) => {
   const input = E('input', attributes);
 
   input.addEventListener('click', () => {
-    ListToggleLabel.textContent = text;
+    Events.UPDATE_LABEL_TEXT.publish(`All ${text}`);
     Events.UPDATE_DISPLAY_FILTER.publish({ filterId: null });
     Events.UPDATE_DISPLAY_TYPE.publish(value);
   });

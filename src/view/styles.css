@@ -88,18 +88,18 @@ nav {
     grid-template-rows: min-content 1fr;
     grid-template-columns: initial;
   }
-  nav {
-    padding: 1rem !important;
-  }
   nav img {
     /* Fixed size roughly the same as Bootstrap's `.navbar-toggler` */
     width: 3.5rem;
     height: auto;
     padding: var(--bs-navbar-toggler-padding-y)
-      var(--bs-navbar-toggler-padding-x);
+      var(--bs-navbar-toggler-padding-x) !important;
   }
   nav .navbar-collapse > * {
     padding-top: 1.5rem;
+  }
+  nav > *:last-child {
+    display: none !important;
   }
 }
 @media only screen and (min-width: 576px) {
@@ -109,15 +109,18 @@ nav {
   }
   nav {
     flex-direction: column-reverse;
-    padding-top: 1.5rem !important;
   }
   nav img {
     /* Mostly from Bootstrap's `.img-fluid` class */
     width: 100%;
     height: auto;
+    padding: 0 !important;
   }
   nav .navbar-collapse > * {
     padding-top: initial;
+  }
+  nav > *:last-child {
+    display: flex !important;
   }
 }
 @media only screen and (min-width: 992px) {
@@ -125,6 +128,10 @@ nav {
     margin: 1rem;
     border-radius: var(--bs-border-radius);
   }
+}
+nav label.text-truncate {
+  width: 0;
+  max-width: 100%;
 }
 
 /*  Workaround to absolutely positioned element scrolling with the parent container
