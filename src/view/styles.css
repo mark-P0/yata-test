@@ -12,6 +12,9 @@
 .fs-smaller {
   font-size: smaller;
 }
+.fs-larger {
+  font-size: larger;
+}
 .z-low {
   z-index: -100;
 }
@@ -86,13 +89,17 @@ nav {
     grid-template-columns: initial;
   }
   nav {
-    flex-direction: row-reverse;
+    padding: 1rem !important;
   }
-  /* Height grows unexpectedly unless set to 0... */
   nav img {
-    width: auto;
-    height: 0;
-    min-height: 100%;
+    /* Fixed size roughly the same as Bootstrap's `.navbar-toggler` */
+    width: 3.5rem;
+    height: auto;
+    padding: var(--bs-navbar-toggler-padding-y)
+      var(--bs-navbar-toggler-padding-x);
+  }
+  nav .navbar-collapse > * {
+    padding-top: 1.5rem;
   }
 }
 @media only screen and (min-width: 576px) {
@@ -101,13 +108,16 @@ nav {
     grid-template-columns: 1fr 4fr;
   }
   nav {
-    flex-direction: column;
+    flex-direction: column-reverse;
+    padding-top: 1.5rem !important;
   }
-  /* Mostly from Bootstrap's `.img-fluid` class */
   nav img {
+    /* Mostly from Bootstrap's `.img-fluid` class */
     width: 100%;
     height: auto;
-    min-height: initial;
+  }
+  nav .navbar-collapse > * {
+    padding-top: initial;
   }
 }
 @media only screen and (min-width: 992px) {

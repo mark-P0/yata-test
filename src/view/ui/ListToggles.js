@@ -2,6 +2,11 @@ import { InstanceIDs, ModelIDs } from 'src/model/ids.js';
 import { E } from '../__dom__.js';
 import { Events } from 'src/controller/pubsub.js';
 
+const ListToggleLabel = E('label', {
+  class:
+    'navbar-toggler border-none text-light flex-grow-1 mx-3 text-center fw-bold fs-larger user-select-none',
+});
+
 const ListToggle = (group, value, text, isDefault = false) => {
   let attributes;
 
@@ -10,6 +15,7 @@ const ListToggle = (group, value, text, isDefault = false) => {
   const input = E('input', attributes);
 
   input.addEventListener('click', () => {
+    ListToggleLabel.textContent = text;
     Events.UPDATE_DISPLAY_FILTER.publish({ filterId: null });
     Events.UPDATE_DISPLAY_TYPE.publish(value);
   });
@@ -25,17 +31,17 @@ const ListToggle = (group, value, text, isDefault = false) => {
   return [input, label];
 };
 
-const ListToggles = () => {
-  let attributes, children;
+const ListTogglesContainerID = InstanceIDs.generate('HTML');
+const ListToggles = E(
+  'div',
+  { class: 'collapse navbar-collapse w-100', id: ListTogglesContainerID },
+  [
+    E('div', { class: 'text-white vstack gap-3' }, [
+      ...ListToggle(ListTogglesContainerID, ModelIDs.TODO, 'Todos', true),
+      ...ListToggle(ListTogglesContainerID, ModelIDs.PROJECT, 'Projects'),
+    ]),
+  ]
+);
 
-  const id = InstanceIDs.generate('HTML');
-  attributes = { class: 'bg-dark text-white vstack gap-3', id };
-  children = [
-    ...ListToggle(id, ModelIDs.TODO, 'Todos', true),
-    ...ListToggle(id, ModelIDs.PROJECT, 'Projects'),
-  ];
-
-  return E('div', attributes, children);
-};
-
-export default ListToggles();
+export default ListToggles;
+export { ListTogglesContainerID, ListToggleLabel };

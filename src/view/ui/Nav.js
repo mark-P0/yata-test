@@ -1,18 +1,40 @@
+import { InstanceIDs } from 'src/model/ids.js';
 import BrandIcon from 'src/assets/icon.png';
-import ListToggles from './ListToggles.js';
+import ListToggles, {
+  ListToggleLabel,
+  ListTogglesContainerID,
+} from './ListToggles.js';
 import { E } from '../__dom__.js';
 
-const NavBrand = () => {
-  return E('img', { src: BrandIcon, class: 'filter-invert' });
-};
+const NavBrand = E('img', {
+  src: BrandIcon,
+  class: 'navbar-brand m-0 filter-invert',
+  alt: 'Brand icon',
+});
 
-const Nav = () => {
-  const nav = E('nav', { class: 'bg-dark text-white d-flex gap-3 p-3' }, [
-    ListToggles,
-    NavBrand(),
-  ]);
+const NavCollapseToggleID = InstanceIDs.generate('HTML');
+const NavCollapseToggle = E(
+  'button',
+  {
+    type: 'button',
+    class: 'navbar-toggler',
+    'data-bs-toggle': 'collapse',
+    'data-bs-target': '#' + ListTogglesContainerID,
+    'aria-controls': ListTogglesContainerID,
+    'aria-expanded': false,
+    'aria-label': 'Toggle navigation',
+    id: NavCollapseToggleID,
+  },
+  [E('span', { class: 'navbar-toggler-icon' })]
+);
+ListToggleLabel.setAttribute('for', NavCollapseToggleID);
 
-  return nav;
-};
+const Nav = E(
+  'nav',
+  {
+    class: 'navbar navbar-dark navbar-expand-sm bg-dark text-white',
+  },
+  [NavBrand, ListToggleLabel, NavCollapseToggle, ListToggles]
+);
 
-export default Nav();
+export default Nav;
