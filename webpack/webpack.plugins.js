@@ -18,6 +18,7 @@ const AppInfo = {
 
 const Plugins = {
   HTMLGenerator: new HtmlWebpackPlugin({
+    template: './src/view/index.ejs',
     /* Descriptors; includes Open Graph information */
     title: AppInfo.name,
     meta: {
