@@ -7,6 +7,8 @@ import ListToggles, {
 import { E } from '../__dom__.js';
 import { Events } from 'src/controller/pubsub.js';
 
+let attributes;
+
 const NavBrand = E('img', {
   src: BrandIcon,
   class: 'navbar-brand m-0 filter-invert',
@@ -14,20 +16,19 @@ const NavBrand = E('img', {
 });
 
 const NavCollapseToggleID = InstanceIDs.generate('HTML');
-const NavCollapseToggle = E(
-  'button',
-  {
-    type: 'button',
-    class: 'navbar-toggler',
-    'data-bs-toggle': 'collapse',
-    'data-bs-target': '#' + ListTogglesContainerID,
-    'aria-controls': ListTogglesContainerID,
-    'aria-expanded': false,
-    'aria-label': 'Toggle navigation',
-    id: NavCollapseToggleID,
-  },
-  [E('span', { class: 'navbar-toggler-icon' })]
-);
+attributes = {
+  type: 'button',
+  class: 'navbar-toggler',
+  'data-bs-toggle': 'collapse',
+  'data-bs-target': '#' + ListTogglesContainerID,
+  'aria-controls': ListTogglesContainerID,
+  'aria-expanded': false,
+  'aria-label': 'Toggle navigation',
+  id: NavCollapseToggleID,
+};
+const NavCollapseToggle = E('button', attributes, [
+  E('span', { class: 'navbar-toggler-icon' }),
+]);
 
 const NavLabel = () => {
   const label = E('label', {
@@ -40,18 +41,15 @@ const NavLabel = () => {
   return E('div', { class: 'w-100 d-flex pt-1 pb-3' }, [label]);
 };
 
-const Nav = E(
-  'nav',
-  {
-    class: 'navbar navbar-dark navbar-expand-sm bg-dark text-white p-3',
-  },
-  [
-    NavBrand,
-    ListToggleLabel(NavCollapseToggleID),
-    NavCollapseToggle,
-    ListToggles,
-    NavLabel(),
-  ]
-);
+attributes = {
+  class: 'navbar navbar-dark navbar-expand-sm bg-dark text-white p-3',
+};
+const Nav = E('nav', attributes, [
+  NavBrand,
+  ListToggleLabel(NavCollapseToggleID),
+  NavCollapseToggle,
+  ListToggles,
+  NavLabel(),
+]);
 
 export default Nav;
