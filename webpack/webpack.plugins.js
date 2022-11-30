@@ -25,6 +25,8 @@ const Plugins = {
       description: AppInfo.description,
       'og:title': AppInfo.name,
       'og:description': AppInfo.description,
+
+      viewport: 'width=device-width, initial-scale=1.0',
     },
   }),
 

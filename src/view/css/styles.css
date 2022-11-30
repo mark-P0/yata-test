@@ -11,7 +11,7 @@ main {
 nav {
   display: flex;
 }
-@media only screen and (min-width: 0px) {
+@media screen and (min-width: 0px) {
   #app {
     grid-template-rows: min-content 1fr;
     grid-template-columns: initial;
@@ -30,7 +30,7 @@ nav {
     display: none !important;
   }
 }
-@media only screen and (min-width: 576px) {
+@media screen and (min-width: 576px) {
   #app {
     grid-template-rows: initial;
     grid-template-columns: 1fr 4fr;
@@ -51,7 +51,7 @@ nav {
     display: flex !important;
   }
 }
-@media only screen and (min-width: 992px) {
+@media screen and (min-width: 992px) {
   nav {
     margin: 1rem;
     border-radius: var(--bs-border-radius);
@@ -81,17 +81,17 @@ main .d-grid {
   display: grid;
   grid-template-columns: repeat(var(--col-ct), 1fr);
 }
-@media only screen and (min-width: 0px) {
+@media screen and (min-width: 0px) {
   main .d-grid {
     --col-ct: 1;
   }
 }
-@media only screen and (min-width: 576px) {
+@media screen and (min-width: 576px) {
   main .d-grid {
     --col-ct: 2;
   }
 }
-@media only screen and (min-width: 992px) {
+@media screen and (min-width: 992px) {
   main .d-grid {
     --col-ct: 3;
   }
