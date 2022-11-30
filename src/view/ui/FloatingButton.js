@@ -21,7 +21,7 @@ const FloatingButton = () => {
   });
 
   attributes = {
-    class: 'position-absolute bottom-0 end-0',
+    class: 'position-absolute bottom-0 end-0 z-high',
     id: 'floating-button',
   };
   return E('div', attributes, [button]);
