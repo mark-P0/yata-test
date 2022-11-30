@@ -1,5 +1,5 @@
 import './view/bootstrap.js';
-import './view/styles.css';
+import './view/css/styles.css';
 
 import './model/task-lists.js';
 import './model/display.js';

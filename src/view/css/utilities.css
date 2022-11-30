@@ -1,0 +1,50 @@
+/* Most of these serve as extensions to Bootstrap's utilities */
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.flex-maximize {
+  display: flex;
+}
+.flex-maximize > * {
+  flex: 1;
+}
+
+.fs-smaller {
+  font-size: smaller;
+}
+.fs-larger {
+  font-size: larger;
+}
+
+.z-low {
+  z-index: -100;
+}
+.z-normal {
+  z-index: 0;
+}
+.z-high {
+  z-index: 100;
+}
+
+.border-none {
+  border: none;
+}
+
+.shadow-md {
+  --base-size: calc(1rem / 3);
+  box-shadow: 0 calc(var(--base-size) / 2) var(--base-size) rgb(0 0 0 / 15%);
+}
+
+.space-before::before {
+  margin-right: 0.5rem;
+}
+.space-after::after {
+  margin-left: 0.5rem;
+}
+
+.filter-invert {
+  filter: invert(1);
+}
