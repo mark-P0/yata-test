@@ -31,11 +31,14 @@ const NavCollapseToggle = E('button', attributes, [
 ]);
 
 const NavLabel = () => {
-  const label = E('label', {
-    class: 'flex-grow-1 text-truncate fs-smaller fw-semibold',
+  const category = E('span', { class: 'fw-light text-uppercase' });
+  const value = E('span', { class: 'fw-semibold' });
+  const label = E('label', [category, value], {
+    class: 'flex-grow-1 text-truncate fs-smaller user-select-none',
   });
   Events.UPDATE_LABEL_TEXT.subscribe((text) => {
-    label.textContent = text;
+    category.textContent = text.category ? `${text.category}: ` : '';
+    value.textContent = text.value;
   });
 
   return E('div', { class: 'w-100 d-flex pt-1 pb-3' }, [label]);
