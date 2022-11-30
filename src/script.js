@@ -1,4 +1,4 @@
-import './view/bootstrap.js';
+import './view/bs/bootstrap.js';
 import './view/css/styles.css';
 
 import './model/task-lists.js';
