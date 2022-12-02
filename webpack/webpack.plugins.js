@@ -7,7 +7,7 @@ import FaviconsWebpackPlugin from 'favicons-webpack-plugin';
 const AppInfo = {
   name: 'YATA!',
   description: 'Get your tasks done with this Yet Another Todo App!',
-  baseUrl: '/yata/?homescreen=1', // Will be a GitHub Pages subdirectory
+  baseUrl: '/yata-test/?homescreen=1', // Will be a GitHub Pages subdirectory
   color: {
     /* Bootstrap's Light and Dark colors */
     theme: '#212529',
