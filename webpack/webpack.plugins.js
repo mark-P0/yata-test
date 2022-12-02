@@ -43,6 +43,13 @@ const Plugins = {
   WorkboxPWA: new WorkboxPlugin.GenerateSW({
     clientsClaim: true,
     skipWaiting: true,
+
+    /*  Ignore all URL parameters
+     *  https://github.com/GoogleChrome/workbox/issues/2512
+     *  https://developer.chrome.com/docs/workbox/modules/workbox-precaching/#ignore-url-parameters
+     *  https://developer.chrome.com/docs/workbox/reference/workbox-webpack-plugin/
+     */
+    ignoreURLParametersMatching: [/.*/],
   }),
 
   /*  PWA compliance. Generates favicons and app manifest.
